@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polish Salary Calculator 2024 — UoP vs B2B vs Zlecenie | Warsaw Expat Hub</title>
+<meta name="description" content="Free Polish salary calculator 2024. Compare UoP, B2B/JDG, Umowa Zlecenia. Full ZUS and tax breakdown in English. For expats in Warsaw.">
+<meta property="og:title" content="Polish Salary Calculator 2024 | Warsaw Expat Hub">
+<meta property="og:description" content="Compare all Polish employment contracts. Free tool, in English.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://expathub.pl/calculator">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #F8F7F4; }
+  /* Mini nav */
+  .calc-nav { background: #1B2E4B; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .calc-nav-logo { font-family: 'Fraunces', serif; color: white; font-size: 18px; text-decoration: none; }
+  .calc-nav-logo em { color: #E63946; font-style: italic; }
+  .calc-nav-back { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; }
+  .calc-nav-back:hover { color: white; }
+</style>
+</head>
+<body>
+<nav class="calc-nav">
+  <a href="/" class="calc-nav-logo">Warsaw<em>Expat</em>Hub</a>
+  <a href="/" class="calc-nav-back">← Back to main site</a>
+</nav>
+
+<!-- TAX CALCULATOR -->
+<section class="calculator-section" id="calculator">
+<style>
+
+  :root {
+    --navy: #1B2E4B;
+    --red: #E63946;
+    --cream: #F8F7F4;
+    --border: #E8E6E1;
+    --muted: #6B7280;
+    --text: #1a1a2e;
+    --green: #16a34a;
+    --blue: #2563eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--text); }
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+  .calc-wrapper { max-width: 960px; margin: 0 auto; padding: 48px 20px; }
+  
+  .calc-header { text-align: center; margin-bottom: 40px; }
+  .calc-header .label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+  .calc-header h1 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 300; color: var(--navy); line-height: 1.2; margin-bottom: 12px; }
+  .calc-header h1 em { font-style: italic; }
+  .calc-header p { font-size: 15px; color: var(--muted); max-width: 540px; margin: 0 auto; line-height: 1.6; }
+
+  /* MODE SWITCHER */
+  .mode-tabs { display: flex; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 5px; gap: 4px; margin-bottom: 28px; }
+  .mode-tab { flex: 1; padding: 12px; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; color: var(--muted); transition: all 0.2s; }
+  .mode-tab.active { background: var(--navy); color: white; }
+
+  /* MAIN GRID */
+  .calc-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
+  
+  /* INPUT PANEL */
+  .input-panel { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 22px; }
+  .field-group label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .field-group label span { font-weight: 400; text-transform: none; letter-spacing: 0; color: #9ca3af; }
+  .input-wrap { position: relative; }
+  .input-wrap input, .input-wrap select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 16px; font-weight: 600; color: var(--navy); background: var(--cream); outline: none; transition: border-color 0.2s; appearance: none; }
+  .input-wrap input:focus, .input-wrap select:focus { border-color: var(--navy); background: white; }
+  .input-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--muted); pointer-events: none; }
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+  .toggle-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .toggle-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: #d1d5db; border-radius: 24px; cursor: pointer; transition: 0.2s; }
+  .slider:before { content: ''; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.2s; }
+  input:checked + .slider { background: var(--navy); }
+  input:checked + .slider:before { transform: translateX(20px); }
+  .divider { height: 1px; background: var(--border); }
+  .range-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .range-display { display: flex; justify-content: space-between; align-items: center; }
+  .range-val { font-size: 20px; font-weight: 700; color: var(--navy); font-family: 'Fraunces', serif; }
+  input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 4px; background: var(--border); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+
+  /* RESULTS PANEL */
+  .results-panel { display: flex; flex-direction: column; gap: 16px; }
+
+  /* NET SALARY CARD */
+  .net-card { background: var(--navy); border-radius: 16px; padding: 28px; color: white; position: relative; overflow: hidden; }
+  .net-card::before { content: ''; position: absolute; width: 200px; height: 200px; background: radial-gradient(circle, rgba(230,57,70,0.2) 0%, transparent 70%); top: -60px; right: -40px; pointer-events: none; }
+  .net-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .net-amount { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 700; color: white; line-height: 1; margin-bottom: 4px; }
+  .net-amount span { font-size: 22px; font-weight: 400; opacity: 0.7; }
+  .net-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+  .net-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .net-stat { }
+  .net-stat-val { font-size: 18px; font-weight: 700; color: white; font-family: 'Fraunces', serif; }
+  .net-stat-val.green { color: #4ade80; }
+  .net-stat-val.red { color: #f87171; }
+  .net-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* BREAKDOWN CARD */
+  .breakdown-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .breakdown-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+  .breakdown-rows { display: flex; flex-direction: column; gap: 0; }
+  .brow { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .brow:last-child { border-bottom: none; }
+  .brow.group-header { padding: 14px 0 6px; border-bottom: none; }
+  .brow.subtotal { background: var(--cream); margin: 0 -8px; padding: 10px 8px; border-radius: 8px; border: none; margin-bottom: 4px; }
+  .brow-left { display: flex; flex-direction: column; gap: 2px; }
+  .brow-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .brow-rate { font-size: 11px; color: var(--muted); }
+  .brow-amount { font-size: 14px; font-weight: 700; white-space: nowrap; }
+  .brow-amount.deduction { color: var(--red); }
+  .brow-amount.positive { color: var(--green); }
+  .brow-amount.neutral { color: var(--navy); }
+  .group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  /* COMPARE CARD */
+  .compare-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .compare-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .compare-col { border: 1.5px solid var(--border); border-radius: 12px; padding: 16px; transition: all 0.2s; }
+  .compare-col.best { border-color: var(--navy); background: #f0f4ff; }
+  .compare-col-header { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .best-badge { background: var(--navy); color: white; font-size: 9px; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.05em; }
+  .compare-net { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .compare-diff { font-size: 12px; font-weight: 600; }
+  .compare-diff.up { color: var(--green); }
+  .compare-diff.down { color: var(--red); }
+  .compare-rows { margin-top: 12px; display: flex; flex-direction: column; gap: 5px; }
+  .cr { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  .cr span:last-child { color: var(--text); font-weight: 500; }
+
+  /* EMPLOYER COST */
+  .employer-card { background: #fff8f0; border: 1px solid #fed7aa; border-radius: 16px; padding: 24px; }
+  .employer-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #92400e; margin-bottom: 16px; }
+  .employer-total { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: #92400e; margin-bottom: 16px; }
+  .employer-rows { display: flex; flex-direction: column; gap: 8px; }
+  .er { display: flex; justify-content: space-between; font-size: 13px; }
+  .er-name { color: var(--muted); }
+  .er-amount { font-weight: 600; color: var(--text); }
+
+  /* NOTE BOX */
+  .note-box { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .note-box strong { color: var(--text); }
+
+  /* B2B SPECIFIC */
+  .b2b-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .regime-btn { padding: 10px 6px; border: 1.5px solid var(--border); border-radius: 10px; background: white; font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer; text-align: center; transition: all 0.2s; }
+  .regime-btn.active { border-color: var(--navy); background: var(--navy); color: white; }
+
+  @media (max-width: 768px) {
+    .calc-grid { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .net-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+.calculator-section { background: var(--cream); padding: 60px; }
+@media(max-width:768px){ .calculator-section{ padding: 30px 16px; } }
+</style>
+<div class="calc-wrapper">
+
+  <div class="calc-header">
+    <div class="label">🇵🇱 2024 · Updated for Polish Deal</div>
+    <h1>Polish Salary Calculator<br><em>UoP vs B2B — real numbers</em></h1>
+    <p>Enter your gross salary or B2B rate and see exactly where your money goes — every contribution, every deduction, explained in English.</p>
+  </div>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('uop', this)">🏢 UoP (Employment contract)</button>
+    <button class="mode-tab" onclick="setMode('b2b', this)">💼 B2B / JDG (Self-employed)</button>
+    <button class="mode-tab" onclick="setMode('zlecenie', this)">📝 Umowa Zlecenia</button>
+    <button class="mode-tab" onclick="setMode('compare', this)">⚖️ Compare all</button>
+  </div>
+
+  <div id="panelUop">
+    <div class="calc-grid">
+      <!-- INPUT -->
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Gross monthly salary <span>(brutto)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="uopGross" value="10000" oninput="onUopGrossInput(this.value)" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="rangeVal">10 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="10000" id="salaryRange" oninput="syncRange(this.value)" list="tickmarks">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>0</span><span>50k</span><span>100k</span><span>150k</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Commuter deduction</div>
+            <div class="toggle-sub">300 PLN/month instead of 250 — if you live outside Warsaw</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="commuter" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Mid-year join (before July)</div>
+            <div class="toggle-sub">Affects annual free amount calculations</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="midyear" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Under 26 — ZIT relief</div>
+            <div class="toggle-sub">No income tax up to 85,528 PLN/year</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="under26" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="note-box">
+          <strong>UoP = Umowa o Pracę</strong> — standard employment contract. Your employer pays you a gross salary. ZUS and tax are deducted at source. You pay part of ZUS; your employer pays another part on top.
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="results-panel">
+        <!-- NET -->
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home</div>
+          <div class="net-amount" id="uopNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="uopNetSub">— net (netto)</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="uopTotalDeductions">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopEffRate">0%</div>
+              <div class="net-stat-label">Effective tax rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopAnnualGross">0 PLN</div>
+              <div class="net-stat-label">Annual gross</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BREAKDOWN -->
+        <div class="breakdown-card">
+          <div class="breakdown-title">
+            <span>Full breakdown</span>
+            <span style="font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">employee view</span>
+          </div>
+          <div class="breakdown-rows">
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Gross salary</div><div class="brow-rate">brutto</div></div>
+              <div class="brow-amount neutral" id="b_gross">0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Employee ZUS contributions</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Pension (emerytalne)</div><div class="brow-rate">9.76% of gross</div></div>
+              <div class="brow-amount deduction" id="b_pension">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Disability (rentowe)</div><div class="brow-rate">1.5% of gross</div></div>
+              <div class="brow-amount deduction" id="b_disability">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Sickness (chorobowe)</div><div class="brow-rate">2.45% of gross</div></div>
+              <div class="brow-amount deduction" id="b_sickness">− 0 PLN</div>
+            </div>
+            <div class="brow subtotal">
+              <div class="brow-left"><div class="brow-name" style="font-weight:700">Total employee ZUS</div></div>
+              <div class="brow-amount deduction" id="b_zusTotalEmp">− 0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Health insurance (NFZ)</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Health contribution</div><div class="brow-rate">9% of (gross − employee ZUS) · not tax-deductible since 2022</div></div>
+              <div class="brow-amount deduction" id="b_health">− 0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Income tax (PIT)</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">gross − ZUS employee − kosztyu uzyskania (250/300 PLN)</div></div>
+              <div class="brow-amount neutral" id="b_taxBase">0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax before relief</div><div class="brow-rate" id="b_taxRateLabel">12% (threshold: 120 000 PLN/year)</div></div>
+              <div class="brow-amount deduction" id="b_taxBeforeRelief">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax-free allowance relief</div><div class="brow-rate">300 PLN/month (30 000 PLN/year free amount)</div></div>
+              <div class="brow-amount positive" id="b_taxRelief">+ 0 PLN</div>
+            </div>
+            <div class="brow subtotal">
+              <div class="brow-left"><div class="brow-name" style="font-weight:700">Income tax payable</div></div>
+              <div class="brow-amount deduction" id="b_taxFinal">− 0 PLN</div>
+            </div>
+
+            <div class="brow" style="padding:16px 0 4px;border-bottom:none">
+              <div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net salary (netto)</div></div>
+              <div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)" id="b_net">0 PLN</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMPLOYER COST -->
+        <div class="employer-card">
+          <div class="employer-title">💼 What your employer actually pays</div>
+          <div class="employer-total" id="emp_total">0 PLN / month</div>
+          <div class="employer-rows">
+            <div class="er"><span class="er-name">Your gross salary</span><span class="er-amount" id="emp_gross">0 PLN</span></div>
+            <div class="er"><span class="er-name">Pension (emerytalne) — 9.76%</span><span class="er-amount" id="emp_pension">0 PLN</span></div>
+            <div class="er"><span class="er-name">Disability (rentowe) — 6.5%</span><span class="er-amount" id="emp_disability">0 PLN</span></div>
+            <div class="er"><span class="er-name">Accident insurance (wypadkowe) — 1.67%</span><span class="er-amount" id="emp_accident">0 PLN</span></div>
+            <div class="er"><span class="er-name">Labour Fund (FP) — 2.45%</span><span class="er-amount" id="emp_fp">0 PLN</span></div>
+            <div class="er"><span class="er-name">FGŚP — 0.10%</span><span class="er-amount" id="emp_fgsp">0 PLN</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2B PANEL -->
+  <div id="panelB2b" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Monthly B2B revenue <span>(net invoice)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="b2bRevenue" value="15000" oninput="onB2bInput(this.value)" min="0" step="500">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Monthly business costs</label>
+          <div class="input-wrap">
+            <input type="number" id="b2bCosts" value="500" oninput="calcB2b()" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>Tax regime</label>
+          <div class="b2b-options">
+            <button class="regime-btn active" onclick="setRegime('skala',this)">Skala<br><span style="font-size:10px;font-weight:400">12% / 32%</span></button>
+            <button class="regime-btn" onclick="setRegime('liniowy',this)">Liniowy<br><span style="font-size:10px;font-weight:400">19% flat</span></button>
+            <button class="regime-btn" onclick="setRegime('ryczalt',this)">Ryczałt<br><span style="font-size:10px;font-weight:400">varies</span></button>
+          </div>
+        </div>
+
+        <div id="ryczaltField" style="display:none">
+          <div class="field-group">
+            <label>Ryczałt rate <span>(depends on your PKD)</span></label>
+            <div class="input-wrap">
+              <select id="ryczaltRate" onchange="calcB2b()">
+                <option value="0.08">8.5% — IT, programming services</option>
+                <option value="0.12">12% — most other services</option>
+                <option value="0.15">15% — financial, real estate</option>
+                <option value="0.17">17% — liberal professions</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>ZUS contributions</label>
+          <div class="input-wrap">
+            <select id="zusType" onchange="calcB2b()">
+              <option value="preferential">Preferential (preferencyjny) — first 24 months: ~400 PLN/month</option>
+              <option value="standard" selected>Standard rate — ~1 600 PLN/month</option>
+              <option value="maly">Mały ZUS Plus — income-based, ~500–1 200 PLN/month</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">VAT payer</div>
+            <div class="toggle-sub">Revenue shown is net of VAT (already excluded)</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="vatPayer"><span class="slider"></span></label>
+        </div>
+
+        <div class="note-box">
+          <strong>B2B = JDG (sole proprietorship)</strong> — you invoice your client, pay ZUS yourself, and choose your tax regime. More flexibility, more admin. Often higher take-home at same income level.
+        </div>
+      </div>
+
+      <div class="results-panel">
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home (B2B)</div>
+          <div class="net-amount" id="b2bNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="b2bNetSub">— after ZUS, health and income tax</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="b2bTotalDeductions">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bEffRate">0%</div>
+              <div class="net-stat-label">Effective rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bZusMonthly">0 PLN</div>
+              <div class="net-stat-label">Your ZUS/month</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown-card">
+          <div class="breakdown-title"><span>Full breakdown (B2B)</span></div>
+          <div class="breakdown-rows" id="b2bBreakdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- UMOWA ZLECENIA PANEL -->
+  <div id="panelZlecenie" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Gross monthly rate <span>(brutto)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="zlGross" value="8000" oninput="onZlInput(this.value)" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="zlRangeVal">8 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="8000" id="zlRange" oninput="syncZlRange(this.value)" list="tickmarks">
+          <datalist id="tickmarks"><option value="0"><option value="10000"><option value="20000"><option value="30000"><option value="40000"><option value="50000"><option value="60000"><option value="70000"><option value="80000"><option value="90000"><option value="100000"><option value="120000"><option value="150000"></datalist><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>0</span><span>50k</span><span>100k</span><span>150k</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>ZUS situation</label>
+          <div class="input-wrap">
+            <select id="zlZusSit" onchange="calcZlecenie()">
+              <option value="main">Main / only source of income — full ZUS applies</option>
+              <option value="additional">Additional job — already paying ZUS elsewhere (only health)</option>
+              <option value="student">Student under 26 — no ZUS, no health contribution</option>
+              <option value="retired">Pensioner — no ZUS social, only health</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Voluntary sickness insurance</div>
+            <div class="toggle-sub">2.45% — not mandatory on Zlecenie, but gives sick pay entitlement</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="zlSickness" onchange="calcZlecenie()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Under 26 — ZIT relief</div>
+            <div class="toggle-sub">No income tax up to 85,528 PLN/year</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="zlUnder26" onchange="calcZlecenie()"><span class="slider"></span></label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="note-box">
+          <strong>Umowa Zlecenia</strong> (civil law / mandate contract) is common for contractors, part-timers, and students. It's <em>not</em> an employment contract — no paid holidays, no notice period, no sick pay unless you opt in. Tax uses <strong>20% cost deduction</strong> (koszty uzyskania) instead of the fixed 250 PLN used in UoP.
+        </div>
+      </div>
+
+      <div class="results-panel">
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home (Zlecenie)</div>
+          <div class="net-amount" id="zlNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="zlNetSub">— net (netto)</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="zlTotalDed">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlEffRate">0%</div>
+              <div class="net-stat-label">Effective rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlAnnualGross">0 PLN</div>
+              <div class="net-stat-label">Annual gross</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown-card">
+          <div class="breakdown-title">
+            <span>Full breakdown</span>
+            <span style="font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">employee view</span>
+          </div>
+          <div class="breakdown-rows" id="zlBreakdown"></div>
+        </div>
+
+        <div class="breakdown-card" style="border-color:#fed7aa;background:#fff8f0">
+          <div class="breakdown-title" style="color:#92400e">💼 Employer cost (Zlecenie)</div>
+          <div class="breakdown-rows" id="zlEmployerBreakdown"></div>
+        </div>
+
+        <div class="note-box">
+          <strong>Key differences vs UoP:</strong> No guaranteed holidays, no sick pay (unless you opt in to sickness insurance), no severance. But easier to terminate. Often used for project-based work. <strong>Watch out:</strong> if you work like a regular employee (fixed hours, one employer, personal service), Polish courts can reclassify it as UoP — giving you all employment rights retroactively.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE PANEL -->
+  <div id="panelCompare" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Your gross / B2B rate <span>(same amount, both scenarios)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="cmpAmount" value="12000" oninput="onCmpInput(this.value)" min="0" step="500">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="cmpRangeVal">12 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="12000" id="cmpRange" oninput="syncCmpRange(this.value)" list="tickmarks">
+        </div>
+        <div class="divider"></div>
+        <div class="field-group">
+          <label>B2B monthly costs</label>
+          <div class="input-wrap">
+            <input type="number" id="cmpCosts" value="500" oninput="calcCompare()" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          This comparison uses <strong>the same amount</strong> as both UoP gross and B2B monthly invoice. In reality your B2B rate should be higher than your UoP gross to cover ZUS, holidays and risks you bear yourself.
+        </div>
+      </div>
+
+      <div class="results-panel" id="compareResults"></div>
+    </div>
+  </div>
+
+  <p style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:20px;padding:14px 16px;background:white;border-radius:10px;border:1px solid var(--border)">
+    <strong>Disclaimer:</strong> This calculator provides estimates for informational purposes only and does not constitute tax or legal advice. Polish tax law changes frequently — always verify with a certified accountant (doradca podatkowy) before making financial decisions. WarsawExpatHub accepts no liability for decisions made based on these calculations. ZUS rates shown are for 2024; health contribution rules follow the Polish Deal (Nowy Ład). <a href="#contact" style="color:var(--red)">Get a real consultation →</a>
+  </p>
+
+</div>
+<script>
+
+  let currentRegime = 'skala';
+  let currentMode = 'uop';
+  let sharedAmount = 10000; // synced across tabs
+
+  function fmt(n) { return Math.round(n).toLocaleString('pl-PL') + ' PLN'; }
+  function fmtNum(n) { return Math.round(n).toLocaleString('pl-PL'); }
+  function fmtPct(n) { return (n*100).toFixed(1) + '%'; }
+  function el(id) { return document.getElementById(id); }
+
+
+  // ── CROSS-TAB SYNC ───────────────────────────────────────────────────────
+  function setSharedAmount(v) {
+    sharedAmount = parseFloat(v) || 0;
+    const clamped = Math.min(150000, Math.max(0, sharedAmount));
+    // UoP
+    if (el('uopGross')) { el('uopGross').value = sharedAmount; el('salaryRange').value = clamped; el('rangeVal').textContent = formatRangeLabel(sharedAmount); }
+    // B2B
+    if (el('b2bRevenue')) el('b2bRevenue').value = sharedAmount;
+    // Zlecenie
+    if (el('zlGross')) { el('zlGross').value = sharedAmount; el('zlRange').value = clamped; el('zlRangeVal').textContent = formatRangeLabel(sharedAmount); }
+    // Compare
+    if (el('cmpAmount')) { el('cmpAmount').value = sharedAmount; el('cmpRange').value = clamped; el('cmpRangeVal').textContent = formatRangeLabel(sharedAmount); }
+  }
+
+  function formatRangeLabel(v) {
+    return Math.round(v).toLocaleString('pl-PL') + ' PLN';
+  }
+
+  function onUopGrossInput(v)  { setSharedAmount(v); calcUop(); }
+  function onB2bInput(v)       { setSharedAmount(v); calcB2b(); }
+  function onZlInput(v)        { setSharedAmount(v); calcZlecenie(); }
+  function onCmpInput(v)       { setSharedAmount(v); calcCompare(); }
+
+  function setMode(mode, btn) {
+    currentMode = mode;
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    el('panelUop').style.display = mode === 'uop' ? '' : 'none';
+    el('panelB2b').style.display = mode === 'b2b' ? '' : 'none';
+    if(el('panelZlecenie')) el('panelZlecenie').style.display = mode === 'zlecenie' ? '' : 'none';
+    el('panelCompare').style.display = mode === 'compare' ? '' : 'none';
+    // Propagate current shared amount to newly visible panel
+    setSharedAmount(sharedAmount);
+    if (mode === 'b2b') calcB2b();
+    else if (mode === 'zlecenie') calcZlecenie();
+    else if (mode === 'compare') calcCompare();
+    else calcUop();
+  }
+
+  function syncRange(v) { setSharedAmount(v); calcUop(); }
+  function syncCmpRange(v) { setSharedAmount(v); calcCompare(); }
+
+  function setRegime(r, btn) {
+    currentRegime = r;
+    document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    el('ryczaltField').style.display = r === 'ryczalt' ? '' : 'none';
+    calcB2b();
+  }
+
+  function calcUop() {
+    const gross = parseFloat(el('uopGross').value) || 0;
+    const commuter = el('commuter').checked;
+    const under26 = el('under26').checked;
+
+    // Employee ZUS
+    const pension = gross * 0.0976;
+    const disability = gross * 0.015;
+    const sickness = gross * 0.0245;
+    const zusEmp = pension + disability + sickness;
+
+    // Health (9% of gross - ZUS employee, not deductible)
+    const healthBase = gross - zusEmp;
+    const health = healthBase * 0.09;
+
+    // Tax base
+    const kup = commuter ? 300 : 250;
+    const taxBase = Math.max(0, gross - zusEmp - kup);
+
+    // Tax
+    let taxAnnual = taxBase * 12;
+    let tax = 0;
+    if (!under26) {
+      if (taxAnnual <= 120000) {
+        tax = taxBase * 0.12;
+      } else {
+        // Monthly approximation
+        const monthly120 = 120000/12;
+        if (taxBase <= monthly120) {
+          tax = taxBase * 0.12;
+        } else {
+          tax = monthly120 * 0.12 + (taxBase - monthly120) * 0.32;
+        }
+      }
+      // Free amount relief: 300/month (for income up to ~85k/year gross)
+      const relief = taxBase > 0 ? 300 : 0;
+      tax = Math.max(0, tax - relief);
+    }
+
+    const net = gross - zusEmp - health - tax;
+    const totalDeductions = zusEmp + health + tax;
+    const effRate = gross > 0 ? totalDeductions / gross : 0;
+
+    // Display
+    el('uopNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('uopNetSub').textContent = gross > 0 ? '≈ ' + (net/gross*100).toFixed(1) + '% of gross salary' : '';
+    el('uopTotalDeductions').textContent = '−' + fmt(totalDeductions);
+    el('uopEffRate').textContent = fmtPct(effRate);
+    el('uopAnnualNet').textContent = fmt(net * 12);
+    el('uopAnnualGross').textContent = fmt(gross * 12);
+
+    // Breakdown
+    el('b_gross').textContent = fmt(gross);
+    el('b_pension').textContent = '− ' + fmt(pension);
+    el('b_disability').textContent = '− ' + fmt(disability);
+    el('b_sickness').textContent = '− ' + fmt(sickness);
+    el('b_zusTotalEmp').textContent = '− ' + fmt(zusEmp);
+    el('b_health').textContent = '− ' + fmt(health);
+    el('b_taxBase').textContent = fmt(taxBase);
+    el('b_taxBeforeRelief').textContent = '− ' + fmt(taxBase <= 120000/12 ? taxBase*0.12 : (120000/12)*0.12+(taxBase-120000/12)*0.32);
+    el('b_taxRelief').textContent = under26 ? '+ 300 PLN (ZIT relief)' : '+ 300 PLN';
+    el('b_taxFinal').textContent = '− ' + fmt(tax);
+    el('b_net').textContent = fmt(net);
+
+    // Employer cost
+    const empPension = gross * 0.0976;
+    const empDisability = gross * 0.065;
+    const empAccident = gross * 0.0167;
+    const empFP = gross * 0.0245;
+    const empFGSP = gross * 0.001;
+    const empTotal = gross + empPension + empDisability + empAccident + empFP + empFGSP;
+    el('emp_gross').textContent = fmt(gross);
+    el('emp_pension').textContent = fmt(empPension);
+    el('emp_disability').textContent = fmt(empDisability);
+    el('emp_accident').textContent = fmt(empAccident);
+    el('emp_fp').textContent = fmt(empFP);
+    el('emp_fgsp').textContent = fmt(empFGSP);
+    el('emp_total').textContent = fmt(empTotal) + ' / month';
+  }
+
+  function getZusB2b() {
+    const type = el('zusType').value;
+    if (type === 'preferential') return { zus: 400, health: null, label: '~400 PLN (preferential)' };
+    if (type === 'maly') return { zus: 850, health: null, label: '~850 PLN (Mały ZUS+, estimate)' };
+    return { zus: 1600, health: null, label: '~1 600 PLN (standard)' };
+  }
+
+  function calcB2b() {
+    const revenue = parseFloat(el('b2bRevenue').value) || 0;
+    const costs = parseFloat(el('b2bCosts').value) || 0;
+    const zusInfo = getZusB2b();
+    const zus = zusInfo.zus;
+    const income = revenue - costs;
+
+    let healthContrib, taxBase, tax, net, rows = '';
+
+    if (currentRegime === 'skala') {
+      healthContrib = Math.max(0, income - zus) * 0.09;
+      taxBase = Math.max(0, income - zus);
+      const relief = taxBase > 0 ? 300 : 0;
+      const annualBase = taxBase * 12;
+      if (annualBase <= 120000) { tax = taxBase * 0.12 - relief; }
+      else { tax = (120000/12)*0.12 + (taxBase - 120000/12)*0.32 - relief; }
+      tax = Math.max(0, tax);
+      net = revenue - costs - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue (invoice)</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Business costs</div><div class="brow-rate">tax-deductible expenses</div></div><div class="brow-amount deduction">− ${fmt(costs)}</div></div>
+        <div class="brow subtotal"><div class="brow-left"><div class="brow-name" style="font-weight:700">Income (dochód)</div></div><div class="brow-amount neutral">${fmt(income)}</div></div>
+        <div class="brow group-header"><div class="group-label">🔴 ZUS contributions (you pay all of it)</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label} · pension + disability + sickness + accident</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance (NFZ)</div><div class="brow-rate">9% of income − ZUS · partially deductible on skala</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow group-header"><div class="group-label">🔴 Income tax — Skala (12% / 32%)</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">income − ZUS</div></div><div class="brow-amount neutral">${fmt(taxBase)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax (after free amount relief)</div><div class="brow-rate">12% up to 120 000/yr, 32% above · −300 PLN relief/month</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    } else if (currentRegime === 'liniowy') {
+      taxBase = Math.max(0, income - zus);
+      healthContrib = taxBase * 0.049; // liniowy: 4.9% of income
+      tax = taxBase * 0.19;
+      net = revenue - costs - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Business costs</div></div><div class="brow-amount deduction">− ${fmt(costs)}</div></div>
+        <div class="brow subtotal"><div class="brow-left"><div class="brow-name" style="font-weight:700">Income</div></div><div class="brow-amount neutral">${fmt(income)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label}</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance</div><div class="brow-rate">4.9% of income (liniowy rate, partially deductible)</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax — Liniowy</div><div class="brow-rate">19% flat on (income − ZUS) · no free amount relief</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    } else {
+      const rate = parseFloat(el('ryczaltRate').value);
+      healthContrib = revenue * 0.09; // simplified
+      tax = revenue * rate;
+      zus; // same as selected
+      net = revenue - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue</div><div class="brow-rate">costs are NOT deductible on ryczałt</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label}</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance</div><div class="brow-rate">based on revenue brackets (simplified)</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax — Ryczałt</div><div class="brow-rate">${(rate*100).toFixed(1)}% of revenue · no deductions allowed</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    }
+
+    const totalDeductions = (revenue - net);
+    const effRate = revenue > 0 ? totalDeductions / revenue : 0;
+
+    rows += `<div class="brow" style="padding:16px 0 4px;border-bottom:none"><div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net take-home</div></div><div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)">${fmt(net)}</div></div>`;
+    el('b2bBreakdown').innerHTML = rows;
+
+    el('b2bNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('b2bTotalDeductions').textContent = '−' + fmt(totalDeductions);
+    el('b2bEffRate').textContent = fmtPct(effRate);
+    el('b2bAnnualNet').textContent = fmt(net * 12);
+    el('b2bZusMonthly').textContent = fmt(zus);
+  }
+
+  function uopNetFor(gross) {
+    const pension = gross * 0.0976, disability = gross * 0.015, sickness = gross * 0.0245;
+    const zusEmp = pension + disability + sickness;
+    const health = (gross - zusEmp) * 0.09;
+    const taxBase = Math.max(0, gross - zusEmp - 250);
+    let tax;
+    if (taxBase * 12 <= 120000) tax = taxBase * 0.12;
+    else tax = (120000/12)*0.12 + (taxBase - 120000/12)*0.32;
+    tax = Math.max(0, tax - 300);
+    return gross - zusEmp - health - tax;
+  }
+  function b2bNetFor(revenue, costs) {
+    const zus = 1600, income = revenue - costs;
+    const healthContrib = Math.max(0, income - zus) * 0.09;
+    const taxBase = Math.max(0, income - zus);
+    let tax;
+    if (taxBase*12 <= 120000) tax = taxBase*0.12 - 300;
+    else tax = (120000/12)*0.12 + (taxBase-120000/12)*0.32 - 300;
+    tax = Math.max(0, tax);
+    return revenue - costs - zus - healthContrib - tax;
+  }
+  function b2bLiniowy(revenue, costs) {
+    const zus = 1600, income = revenue - costs;
+    const taxBase = Math.max(0, income - zus);
+    const health = taxBase * 0.049;
+    const tax = taxBase * 0.19;
+    return revenue - costs - zus - health - tax;
+  }
+  function b2bRyczalt(revenue, rate) {
+    const zus = 1600, health = revenue * 0.09, tax = revenue * rate;
+    return revenue - zus - health - tax;
+  }
+
+  function calcCompare() {
+    const amount = parseFloat(el('cmpAmount').value) || 0;
+    const costs = parseFloat(el('cmpCosts').value) || 0;
+    const uopN = uopNetFor(amount);
+    const b2bSkala = b2bNetFor(amount, costs);
+    const b2bLin = b2bLiniowy(amount, costs);
+    const b2bRycz = b2bRyczalt(amount, 0.085);
+
+    const results = [
+      { label: 'UoP', sub: 'Skala 12%/32%', net: uopN, color: '#1B2E4B' },
+      { label: 'B2B — Skala', sub: '12%/32% + standard ZUS', net: b2bSkala, color: '#2563eb' },
+      { label: 'B2B — Liniowy', sub: '19% flat + standard ZUS', net: b2bLin, color: '#7c3aed' },
+      { label: 'B2B — Ryczałt', sub: '8.5% (IT/programming)', net: b2bRycz, color: '#d97706' },
+    ].sort((a,b) => b.net - a.net);
+
+    const best = results[0].net;
+    let html = '<div class="net-card" style="margin-bottom:16px"><div class="net-label">Best option for ' + fmt(amount) + ' gross</div>';
+    html += '<div class="net-amount">' + results[0].label + ' <span style="font-size:16px">' + results[0].sub + '</span></div>';
+    html += '<div class="net-sub">Take-home: ' + fmt(results[0].net) + ' vs worst: ' + fmt(results[results.length-1].net) + ' · difference: ' + fmt(best - results[results.length-1].net) + '/month</div></div>';
+
+    html += '<div class="breakdown-card"><div class="breakdown-title">All options compared</div><div class="breakdown-rows">';
+    results.forEach((r, i) => {
+      const diff = r.net - results[results.length-1].net;
+      html += `<div class="brow">
+        <div class="brow-left">
+          <div class="brow-name" style="display:flex;align-items:center;gap:8px">
+            ${i===0?'<span style="background:var(--navy);color:white;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700">BEST</span>':''}
+            ${r.label}
+          </div>
+          <div class="brow-rate">${r.sub}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="brow-amount neutral" style="font-size:16px">${fmt(r.net)}</div>
+          ${i<results.length-1?`<div style="font-size:11px;color:var(--green);font-weight:600">+${fmt(diff)} vs worst</div>`:'<div style="font-size:11px;color:var(--muted)">baseline</div>'}
+        </div>
+      </div>`;
+    });
+    html += '</div></div>';
+
+    html += `<div class="note-box"><strong>Note on B2B rates:</strong> B2B ryczałt 8.5% is for IT/programming services. Your rate may differ. B2B numbers assume standard ZUS (1,600 PLN/month) and ${fmt(costs)} monthly costs. Always verify with an accountant for your specific situation. <a href="#contact" style="color:var(--red);font-weight:600">Get a free tax consultation →</a></div>`;
+
+    el('compareResults').innerHTML = html;
+  }
+
+  // Init
+  calcUop();
+
+
+  function syncZlRange(v) { setSharedAmount(v); calcZlecenie(); }
+
+  function calcZlecenie() {
+    const gross = parseFloat(el('zlGross').value) || 0;
+    const sit = el('zlZusSit').value;
+    const voluntarySick = el('zlSickness').checked;
+    const under26 = el('zlUnder26').checked;
+
+    // ZUS rates (employee side)
+    let pension = 0, disability = 0, sickness = 0, health = 0;
+    let zusNote = '';
+
+    if (sit === 'student') {
+      // No ZUS, no health for students under 26
+      pension = 0; disability = 0; sickness = 0; health = 0;
+      zusNote = 'Student under 26: exempt from ZUS and health contribution';
+    } else if (sit === 'additional') {
+      // Already paying ZUS at main job — only health mandatory
+      pension = 0; disability = 0; sickness = 0;
+      health = gross * 0.09;
+      zusNote = 'Additional contract: only health (9%) applies — ZUS covered by main employer';
+    } else if (sit === 'retired') {
+      // Pensioner: no social ZUS, only health
+      pension = 0; disability = 0; sickness = 0;
+      health = gross * 0.09;
+      zusNote = 'Pensioner: only health insurance applies';
+    } else {
+      // Main job: full ZUS
+      pension = gross * 0.0976;
+      disability = gross * 0.015;
+      sickness = voluntarySick ? gross * 0.0245 : 0;
+      const zusBase = gross - pension - disability - sickness;
+      health = zusBase * 0.09;
+      zusNote = voluntarySick ? 'Full ZUS including voluntary sickness' : 'Full ZUS (sickness insurance not opted in)';
+    }
+
+    const zusTotal = pension + disability + sickness;
+
+    // Tax — Zlecenie uses 20% koszty uzyskania (cost deduction)
+    // Tax base = gross - ZUS employee - 20% koszty
+    const kup = (gross - zusTotal) * 0.20;
+    const taxBase = Math.max(0, gross - zusTotal - kup);
+    let tax = 0;
+
+    if (!under26 && sit !== 'student') {
+      const annualBase = taxBase * 12;
+      if (annualBase <= 120000) {
+        tax = taxBase * 0.12;
+      } else {
+        tax = (120000/12) * 0.12 + (taxBase - 120000/12) * 0.32;
+      }
+      // Free amount relief 300/month
+      tax = Math.max(0, tax - 300);
+    }
+
+    const net = gross - zusTotal - health - tax;
+    const totalDed = gross - net;
+    const effRate = gross > 0 ? totalDed / gross : 0;
+
+    // Update summary
+    el('zlNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('zlNetSub').textContent = fmtPct(net/gross) + ' of gross · ' + zusNote;
+    el('zlTotalDed').textContent = '−' + fmt(totalDed);
+    el('zlEffRate').textContent = fmtPct(effRate);
+    el('zlAnnualNet').textContent = fmt(net * 12);
+    el('zlAnnualGross').textContent = fmt(gross * 12);
+
+    // Breakdown rows
+    let rows = `
+      <div class="brow">
+        <div class="brow-left"><div class="brow-name">Gross rate</div><div class="brow-rate">brutto</div></div>
+        <div class="brow-amount neutral">${fmt(gross)}</div>
+      </div>`;
+
+    if (sit === 'student') {
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name" style="color:var(--green)">✓ ZUS exempt (student u26)</div><div class="brow-rate">No pension, disability, sickness, or health contributions</div></div><div class="brow-amount positive">0 PLN</div></div>`;
+    } else {
+      rows += `<div class="brow group-header"><div class="group-label">🔴 Employee ZUS contributions</div></div>`;
+      if (pension > 0) rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Pension (emerytalne)</div><div class="brow-rate">9.76% of gross</div></div><div class="brow-amount deduction">− ${fmt(pension)}</div></div>`;
+      if (disability > 0) rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Disability (rentowe)</div><div class="brow-rate">1.5% of gross</div></div><div class="brow-amount deduction">− ${fmt(disability)}</div></div>`;
+      if (sit === 'main') {
+        if (voluntarySick) {
+          rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Sickness (chorobowe) — voluntary</div><div class="brow-rate">2.45% of gross · opted in</div></div><div class="brow-amount deduction">− ${fmt(sickness)}</div></div>`;
+        } else {
+          rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Sickness insurance</div><div class="brow-rate">Not opted in — no sick pay entitlement</div></div><div class="brow-amount neutral" style="color:var(--muted)">0 PLN</div></div>`;
+        }
+      }
+      rows += `<div class="brow group-header"><div class="group-label">🔴 Health insurance (NFZ)</div></div>`;
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Health contribution</div><div class="brow-rate">9% of (gross − ZUS)${sit === 'additional' ? ' · only mandatory contribution' : ''}</div></div><div class="brow-amount deduction">− ${fmt(health)}</div></div>`;
+    }
+
+    rows += `<div class="brow group-header"><div class="group-label">🔴 Income tax (PIT)</div></div>`;
+    if (under26 || sit === 'student') {
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name" style="color:var(--green)">✓ Tax exempt (ZIT / student)</div><div class="brow-rate">No income tax up to 85,528 PLN/year</div></div><div class="brow-amount positive">0 PLN</div></div>`;
+    } else {
+      rows += `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Cost deduction (koszty uzyskania)</div><div class="brow-rate">20% of (gross − ZUS) — Zlecenie-specific, vs fixed 250 PLN for UoP</div></div><div class="brow-amount positive">− ${fmt(kup)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">gross − ZUS − 20% koszty</div></div><div class="brow-amount neutral">${fmt(taxBase)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax (after 300 PLN/mo relief)</div><div class="brow-rate">12% up to 120k/yr · 32% above</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    }
+
+    rows += `<div class="brow" style="padding:16px 0 4px;border-bottom:none">
+      <div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net take-home</div></div>
+      <div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)">${fmt(net)}</div>
+    </div>`;
+    el('zlBreakdown').innerHTML = rows;
+
+    // Employer cost breakdown
+    let empRows = '';
+    let empPension = 0, empDisability = 0, empAccident = 0, empFP = 0, empTotal = gross;
+
+    if (sit === 'main' || sit === 'retired') {
+      empPension = gross * 0.0976;
+      empDisability = gross * 0.065;
+      empAccident = gross * 0.0167;
+      // FP only if remuneration >= minimum wage (simplified: always for main)
+      empFP = gross * 0.0245;
+      empTotal = gross + empPension + empDisability + empAccident + empFP;
+    } else if (sit === 'student' || sit === 'additional') {
+      // No employer ZUS contributions for students u26 or additional
+      empTotal = gross;
+    }
+
+    empRows += `<div style="font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:#92400e;margin-bottom:16px">${fmt(empTotal)} / month</div>`;
+    empRows += `<div class="er"><span class="er-name">Your gross rate</span><span class="er-amount">${fmt(gross)}</span></div>`;
+    if (sit === 'main') {
+      empRows += `
+        <div class="er"><span class="er-name">Pension — 9.76%</span><span class="er-amount">${fmt(empPension)}</span></div>
+        <div class="er"><span class="er-name">Disability — 6.5%</span><span class="er-amount">${fmt(empDisability)}</span></div>
+        <div class="er"><span class="er-name">Accident — 1.67%</span><span class="er-amount">${fmt(empAccident)}</span></div>
+        <div class="er"><span class="er-name">Labour Fund (FP) — 2.45%</span><span class="er-amount">${fmt(empFP)}</span></div>`;
+    } else {
+      empRows += `<div class="er"><span class="er-name" style="color:var(--green)">✓ No employer ZUS contributions</span><span class="er-amount" style="color:var(--green)">0 PLN</span></div>`;
+    }
+    empRows += `<div class="er" style="padding-top:10px;border-top:1px solid #fed7aa;margin-top:8px"><span class="er-name" style="font-weight:700">Total employer cost</span><span class="er-amount" style="font-weight:700;color:#92400e">${fmt(empTotal)}</span></div>`;
+    el('zlEmployerBreakdown').innerHTML = empRows;
+  }
+
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showTab(name, el) {
+  document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+}
+
+function calculate() {
+  const gross = parseFloat(document.getElementById('grossInput').value) || 15000;
+  const type = document.getElementById('empType').value;
+  const regime = document.getElementById('taxRegime').value;
+  let net;
+  if (type === 'uop') {
+    const zusEmp = gross * 0.1371;
+    const taxBase = Math.max(gross - zusEmp - 300, 0);
+    const monthlyThreshold = 10000;
+    const pit = taxBase <= monthlyThreshold ? taxBase * 0.12 : monthlyThreshold * 0.12 + (taxBase - monthlyThreshold) * 0.32;
+    const health = gross * 0.09;
+    net = gross - zusEmp - pit - health;
+  } else {
+    const zusFlat = 500;
+    const taxBase = Math.max(gross - zusFlat, 0);
+    let pit;
+    if (regime === 'skala') { pit = taxBase <= 10000 ? taxBase * 0.12 : 1200 
+
+</script>
+</section>
+
+
+
+</body>
+</html>

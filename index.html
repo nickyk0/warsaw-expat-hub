@@ -1,0 +1,2293 @@
+
+  // Direct link to calculator: expathub.pl/#calculator
+  if (window.location.hash === '#calculator') {
+    window.addEventListener('load', function() {
+      var target = document.getElementById('calculator');
+      if (target) setTimeout(function() { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
+    });
+  }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="description" content="Free Polish salary calculator 2024 — compare UoP, B2B, Umowa Zlecenia. See exact take-home pay, ZUS contributions, income tax breakdown in English. For expats in Warsaw.">
+  <meta name="keywords" content="polish salary calculator, kalkulator wynagrodzen english, UoP vs B2B Poland, ZUS calculator, expat Poland salary, warsaw expat">
+  <meta property="og:title" content="Polish Salary Calculator 2024 — UoP vs B2B | Warsaw Expat Hub">
+  <meta property="og:description" content="Compare UoP, B2B/JDG and Umowa Zlecenia in Poland. Full breakdown of ZUS, health insurance and income tax — in English.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://expathub.pl/#calculator">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warsaw Expat Hub — Your Life in Warsaw, Sorted.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B2E4B;
+    --navy-light: #243d63;
+    --red: #E63946;
+    --white: #FFFFFF;
+    --cream: #F8F7F4;
+    --text: #2C2C2C;
+    --muted: #7A7A7A;
+    --border: #E2DDD8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', serif; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--navy); padding: 9px 60px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+  }
+  .topbar-left { display: flex; gap: 20px; align-items: center; }
+  .topbar-left a { color: rgba(255,255,255,0.75); text-decoration: none; display: flex; align-items: center; gap: 7px; transition: color 0.2s; }
+  .topbar-left a:hover { color: white; }
+  .topbar-right { display: flex; gap: 14px; align-items: center; }
+  .topbar-right a { color: rgba(255,255,255,0.65); text-decoration: none; display: flex; align-items: center; transition: color 0.2s; }
+  .topbar-right a:hover { color: white; }
+  .topbar-right svg { width: 16px; height: 16px; fill: currentColor; }
+  .topbar-cta { background: var(--red); color: white !important; padding: 5px 14px; border-radius: 4px; font-weight: 600; font-size: 12px; letter-spacing: 0.03em; margin-left: 6px; }
+
+  /* NAV */
+  nav {
+    background: white; padding: 0 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    height: 64px; box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+  .logo { display: flex; align-items: baseline; text-decoration: none; }
+  .logo-warsaw { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+  .logo-expat { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--red); }
+  .logo-hub { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+  .logo-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; display: inline-block; margin-left: 3px; margin-bottom: 4px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { background: var(--navy) !important; color: white !important; padding: 9px 20px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--red) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy); padding: 90px 60px 80px;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=1600&auto=format&fit=crop&q=80');
+    background-size: cover; background-position: center;
+    opacity: 0.32; z-index: 0;
+  }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(27,46,75,0.97) 40%, rgba(27,46,75,0.75) 100%); z-index: 1; pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(230,57,70,0.15); border: 1px solid rgba(230,57,70,0.25); color: #ffaab0; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 26px; }
+  .pulse { width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 { font-size: clamp(38px, 4.5vw, 62px); font-weight: 300; color: white; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 22px; }
+  .hero h1 em { font-style: italic; color: #ff9ca3; }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 40px; font-weight: 300; }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--red); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: #c62b37; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(230,57,70,0.35); }
+  .btn-outline { background: transparent; color: white; padding: 15px 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.22); text-decoration: none; font-weight: 500; font-size: 15px; transition: all 0.2s; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.05); }
+  .hero-stats { display: flex; gap: 36px; margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 34px; color: white; font-weight: 700; line-height: 1; }
+  .stat-num span { color: var(--red); }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 5px; }
+
+  /* hero card */
+  .hero-content { position: relative; z-index: 2; }
+  .hero-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); position: relative; z-index: 2; }
+  .hc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .hc-avatar { width: 42px; height: 42px; background: linear-gradient(135deg, var(--red), #ff9ca3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; color: white; font-size: 17px; font-weight: 700; }
+  .hc-name { color: white; font-weight: 600; font-size: 14px; }
+  .hc-role { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 2px; }
+  .hc-online { display: flex; align-items: center; gap: 5px; color: #4ade80; font-size: 11px; font-weight: 500; margin-left: auto; }
+  .online-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+  .hc-items { display: flex; flex-direction: column; gap: 10px; }
+  .hc-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 13px 14px; display: flex; align-items: center; gap: 11px; }
+  .hc-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .hc-title { color: white; font-size: 13px; font-weight: 500; }
+  .hc-sub { color: rgba(255,255,255,0.38); font-size: 11px; margin-top: 1px; }
+  .hc-check { margin-left: auto; width: 18px; height: 18px; background: rgba(74,222,128,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #4ade80; font-size: 10px; }
+
+  /* SECTION HELPERS */
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+  .section-title { font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; color: var(--navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 48px; max-width: 560px; }
+  .section-title em { font-style: italic; }
+
+  /* STATS BAR */
+  .stats { background: var(--navy); padding: 50px 60px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-block { text-align: center; padding: 16px; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat-block:last-child { border-right: none; }
+  .stat-big { font-family: 'Fraunces', serif; font-size: 50px; font-weight: 700; color: white; line-height: 1; }
+  .stat-big span { color: var(--red); }
+  .stat-desc { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 8px; }
+
+  /* PAIN */
+  .pain { background: var(--cream); padding: 80px 60px; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  /* PAIN with photos */
+  .pain-card { background: white; border-radius: 16px; padding: 0; border: 1px solid var(--border); transition: all 0.3s; position: relative; overflow: hidden; }
+  .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); opacity: 0; transition: opacity 0.3s; z-index: 2; }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.07); }
+  .pain-card:hover::before { opacity: 1; }
+  .pain-card-img { height: 160px; background-size: cover; background-position: center; position: relative; }
+  .pain-card-img::after { content: ''; position: absolute; inset: 0; }
+  .pain-card-body { padding: 26px 28px; }
+  .pain-card h3 { font-size: 19px; font-weight: 400; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+  .pain-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .pain-solution { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 13px; color: var(--navy); font-weight: 600; }
+
+  /* SERVICES */
+  .services { padding: 80px 60px; background: white; }
+  .services-split { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+  .services-block-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+  .services-block-title { font-size: 24px; font-weight: 400; color: var(--navy); margin-bottom: 26px; }
+  .services-block-title em { font-style: italic; }
+  .svc-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: color 0.2s; }
+  .svc-item:hover .svc-name { color: var(--red); }
+  .svc-icon { width: 28px; height: 28px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+  .svc-name { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+  .svc-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .svc-arrow { margin-left: auto; color: var(--muted); font-size: 16px; flex-shrink: 0; transition: all 0.2s; }
+  .svc-item:hover .svc-arrow { transform: translateX(3px); color: var(--red); }
+
+  /* REMOTE SERVICES */
+  .remote { background: white; padding: 80px 60px; }
+  .remote-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 48px; }
+  .remote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .remote-card {
+    background: var(--cream); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column;
+  }
+  .remote-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.1); border-color: var(--navy); }
+  .remote-card-img {
+    height: 140px; background-size: cover; background-position: center;
+    position: relative; flex-shrink: 0;
+  }
+  .remote-card-img-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: flex-end; padding: 14px 16px;
+  }
+  .remote-card-img-label {
+    font-family: 'Fraunces', serif; color: white; font-size: 14px;
+    font-style: italic; font-weight: 400;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .remote-card-body { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .remote-card h3 { font-size: 16px; font-weight: 600; color: var(--navy); font-family: 'DM Sans', sans-serif; line-height: 1.3; }
+  .remote-card p { font-size: 13px; color: var(--muted); line-height: 1.65; flex: 1; }
+  .remote-price { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--red); margin-top: 4px; }
+  .remote-card-cta { background: var(--navy); border-color: var(--navy); }
+  .remote-card-cta .remote-card-body { background: var(--navy); }
+  .remote-card-cta h3 { color: white; }
+  .remote-card-cta p { color: rgba(255,255,255,0.6); }
+  @media (max-width: 1024px) { .remote-grid { grid-template-columns: 1fr 1fr; } .remote { padding-left: 40px; padding-right: 40px; } }
+  @media (max-width: 768px) { .remote-grid { grid-template-columns: 1fr; } .remote { padding: 50px 20px; } }
+
+  /* FREE CONSULT BANNER */
+  .free-consult { background: linear-gradient(135deg, var(--red), #c62b37); padding: 50px 60px; display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .free-consult h3 { font-size: 28px; font-weight: 300; color: white; }
+  .free-consult h3 em { font-style: italic; font-weight: 600; }
+  .free-consult p { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 6px; }
+  .btn-white { background: white; color: var(--red); padding: 15px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; }
+  .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+
+  /* PRICING */
+  .pricing { background: var(--cream); padding: 80px 60px; }
+  .pricing-tabs { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; width: fit-content; margin-bottom: 36px; }
+  .ptab { padding: 10px 24px; font-size: 14px; font-weight: 600; cursor: pointer; background: white; color: var(--muted); border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+  .ptab.active { background: var(--navy); color: white; }
+  .pricing-panel { display: none; }
+  .pricing-panel.active { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pricing-card { background: white; border-radius: 16px; border: 1px solid var(--border); padding: 30px 26px; position: relative; transition: all 0.3s; }
+  .pricing-card:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,0.08); }
+  .pricing-card.featured { background: var(--navy); border-color: var(--navy); transform: scale(1.02); }
+  .pricing-card.featured:hover { transform: scale(1.02) translateY(-3px); }
+  .pop-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--red); color: white; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 12px; border-radius: 10px; white-space: nowrap; }
+  .pricing-name { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .pricing-card.featured .pricing-name { color: #ff9ca3; }
+  .pricing-price { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .pricing-card.featured .pricing-price { color: white; }
+  .pricing-price sup { font-size: 20px; font-weight: 400; vertical-align: top; margin-top: 10px; display: inline-block; }
+  .pricing-price .per { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 400; color: var(--muted); }
+  .pricing-card.featured .pricing-price .per { color: rgba(255,255,255,0.5); }
+  .pricing-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+  .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.5); }
+  .pricing-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+  .pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.12); }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 26px; }
+  .pricing-features li { font-size: 13px; color: var(--text); display: flex; align-items: flex-start; gap: 9px; line-height: 1.5; }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.78); }
+  .pricing-features li::before { content: '✓'; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+  .btn-book { display: block; text-align: center; padding: 13px; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s; border: 2px solid var(--navy); color: var(--navy); }
+  .btn-book:hover { background: var(--navy); color: white; }
+  .pricing-card.featured .btn-book { background: var(--red); border-color: var(--red); color: white; }
+  .pricing-card.featured .btn-book:hover { background: #c62b37; border-color: #c62b37; }
+
+  /* CALCULATOR */
+  .calculator { background: white; padding: 80px 60px; }
+  .calc-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .calc-content p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 30px; }
+  .calc-widget { background: var(--cream); border-radius: 20px; padding: 36px; border: 1px solid var(--border); }
+  .calc-widget h3 { font-size: 19px; color: var(--navy); margin-bottom: 22px; font-weight: 500; }
+  .calc-row { margin-bottom: 18px; }
+  .calc-row label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .calc-select, .calc-input { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: white; outline: none; transition: border-color 0.2s; }
+  .calc-select:focus, .calc-input:focus { border-color: var(--navy); }
+  .calc-result { background: var(--navy); border-radius: 12px; padding: 18px 20px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; }
+  .calc-result-label { font-size: 12px; color: rgba(255,255,255,0.55); }
+  .calc-result-value { font-family: 'Fraunces', serif; font-size: 30px; color: white; font-weight: 700; }
+  .calc-disclaimer { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; }
+  .calc-disclaimer a { color: var(--red); font-weight: 600; }
+
+  /* KNOWLEDGE */
+  .knowledge { background: var(--cream); padding: 80px 60px; }
+  .knowledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .kn-card { background: white; border-radius: 16px; padding: 34px; border: 1px solid var(--border); }
+  .kn-tier { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .kn-card h3 { font-size: 22px; font-weight: 400; color: var(--navy); margin-bottom: 20px; }
+  .kn-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .kn-list li { font-size: 14px; color: var(--text); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .kn-list li::before { content: '→'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+  .kn-card.premium { background: var(--navy); border-color: var(--navy); }
+  .kn-card.premium .kn-tier { color: rgba(255,255,255,0.4); }
+  .kn-card.premium h3 { color: white; }
+  .kn-card.premium .kn-list li { color: rgba(255,255,255,0.72); }
+  .kn-card.premium .kn-list li::before { color: #ff9ca3; }
+
+  /* BLOG */
+  .blog { background: white; padding: 80px 60px; }
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .blog-card { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.08); }
+  .blog-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 44px; }
+  .blog-body { padding: 22px; }
+  .blog-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+  .blog-card h3 { font-size: 17px; font-weight: 400; color: var(--navy); line-height: 1.4; margin-bottom: 10px; }
+  .blog-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+  .blog-meta { font-size: 12px; color: var(--muted); display: flex; gap: 12px; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--cream); padding: 80px 60px; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .testimonial { background: white; border-radius: 16px; padding: 30px; border: 1px solid var(--border); }
+  .testimonial-stars { color: #F59E0B; font-size: 13px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testimonial p { font-size: 14px; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+  .t-author { display: flex; align-items: center; gap: 11px; }
+  .t-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 15px; flex-shrink: 0; }
+  .t-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+  .t-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* CTA BANNER */
+  .cta-banner { background: var(--navy); padding: 80px 60px; text-align: center; position: relative; overflow: hidden; }
+  .cta-banner::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(230,57,70,0.12) 0%, transparent 70%); left: 50%; top: 50%; transform: translate(-50%,-50%); }
+  .cta-banner h2 { font-size: clamp(28px, 3.5vw, 48px); font-weight: 300; color: white; margin-bottom: 14px; position: relative; z-index: 2; }
+  .cta-banner h2 em { font-style: italic; color: #ff9ca3; }
+  .cta-banner p { font-size: 16px; color: rgba(255,255,255,0.55); margin-bottom: 36px; position: relative; z-index: 2; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; position: relative; z-index: 2; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { background: #0f1d2e; padding: 56px 60px 28px; color: rgba(255,255,255,0.55); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+  .footer-logo-wrap { display: flex; align-items: baseline; }
+  .fl-warsaw { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: white; }
+  .fl-expat { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 300; font-style: italic; color: var(--red); }
+  .fl-hub { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: white; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; margin-top: 14px; max-width: 250px; }
+  .footer-socials { display: flex; gap: 12px; margin-top: 18px; }
+  .footer-socials a { color: rgba(255,255,255,0.45); transition: color 0.2s; display: flex; }
+  .footer-socials a:hover { color: white; }
+  .footer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+  .footer-col h4 { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: white; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom-links { display: flex; gap: 18px; }
+  .footer-bottom-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-links a:hover { color: white; }
+
+
+  /* ── PROCESS MODALS ── */
+  .svc-item { cursor: pointer; }
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.open { display:flex; }
+  .modal-box { background:white; border-radius:20px; max-width:580px; width:100%; max-height:88vh; overflow-y:auto; box-shadow:0 30px 80px rgba(0,0,0,0.25); }
+  .modal-header { padding:28px 32px 0; display:flex; justify-content:space-between; align-items:flex-start; }
+  .modal-header h3 { font-size:22px; font-weight:400; color:var(--navy); }
+  .modal-close { background:none; border:none; font-size:22px; cursor:pointer; color:var(--muted); line-height:1; padding:2px; }
+  .modal-close:hover { color:var(--navy); }
+  .modal-tag { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+  .modal-body { padding:20px 32px 32px; }
+  .modal-desc { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:24px; }
+  .modal-steps { display:flex; flex-direction:column; gap:0; margin-bottom:24px; }
+  .modal-step { display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); position:relative; }
+  .modal-step:last-child { border-bottom:none; }
+  .step-num { width:28px; height:28px; background:var(--navy); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; margin-top:1px; }
+  .step-content .step-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:3px; }
+  .step-content .step-who { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; }
+  .step-who.you { color:#3b82f6; }
+  .step-who.me { color:var(--red); }
+  .step-content p { font-size:13px; color:var(--muted); line-height:1.6; }
+  .modal-meta { display:flex; gap:16px; flex-wrap:wrap; background:var(--cream); border-radius:12px; padding:16px 18px; margin-bottom:20px; }
+  .meta-item { display:flex; flex-direction:column; gap:2px; }
+  .meta-label { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+  .meta-value { font-size:15px; font-weight:600; color:var(--navy); }
+  .modal-checklist { margin-bottom:24px; }
+  .modal-checklist h4 { font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .checklist-items { display:flex; flex-direction:column; gap:7px; }
+  .checklist-items li { font-size:13px; color:var(--text); list-style:none; display:flex; align-items:flex-start; gap:9px; line-height:1.5; }
+  .checklist-items li::before { content:"□"; color:var(--navy); font-size:14px; flex-shrink:0; }
+  .modal-cta { display:block; text-align:center; background:var(--red); color:white; padding:14px; border-radius:8px; font-weight:700; font-size:15px; text-decoration:none; }
+  .modal-cta:hover { background:#c62b37; }
+
+  /* ── ABOUT ME ── */
+  .about { background:var(--cream); padding:80px 60px; }
+  .about-grid { display:grid; grid-template-columns:1fr 1.6fr; gap:60px; align-items:start; }
+  .about-photo { border-radius:20px; overflow:hidden; aspect-ratio:3/4; background:var(--navy); position:relative; }
+  .about-photo img { width:100%; height:100%; object-fit:cover; }
+  .about-photo-placeholder { width:100%; height:100%; background:linear-gradient(135deg,var(--navy) 0%,#2d4a7a 100%); display:flex; align-items:center; justify-content:center; }
+  .about-initials { font-family:'Fraunces',serif; font-size:80px; font-weight:700; color:rgba(255,255,255,0.15); }
+  .about-badge { display:inline-flex; align-items:center; gap:8px; background:white; border:1px solid var(--border); padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; color:var(--navy); margin-bottom:20px; }
+  .about h2 { font-size:clamp(26px,3vw,40px); font-weight:300; color:var(--navy); line-height:1.2; letter-spacing:-0.02em; margin-bottom:20px; }
+  .about h2 em { font-style:italic; }
+  .about-text p { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:16px; }
+  .about-text p strong { color:var(--text); font-weight:600; }
+  .about-values { display:flex; flex-direction:column; gap:14px; margin-top:28px; }
+  .about-value { display:flex; align-items:flex-start; gap:14px; background:white; border-radius:12px; padding:16px 18px; border:1px solid var(--border); }
+  .av-icon { font-size:22px; flex-shrink:0; }
+  .av-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:3px; }
+  .av-text { font-size:13px; color:var(--muted); line-height:1.5; }
+  @media(max-width:768px){ .about-grid{grid-template-columns:1fr;}.about{padding:50px 20px;} }
+  @media(max-width:1024px){ .about{padding-left:40px;padding-right:40px;}.about-grid{gap:36px;} }
+
+  /* ── FREE GUIDES ── */
+  .guides { background:white; padding:80px 60px; }
+  .guides-intro { font-size:16px; color:var(--muted); line-height:1.7; max-width:600px; margin-bottom:48px; }
+  .guides-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:36px; }
+  .guide-card { background:var(--cream); border:1px solid var(--border); border-radius:14px; padding:24px; transition:all 0.25s; text-decoration:none; color:var(--text); display:block; }
+  .guide-card:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.07); border-color:var(--navy); }
+  .guide-emoji { font-size:28px; margin-bottom:12px; display:block; }
+  .guide-tag { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); margin-bottom:6px; }
+  .guide-card h3 { font-size:15px; font-weight:600; color:var(--navy); line-height:1.4; margin-bottom:8px; }
+  .guide-card p { font-size:13px; color:var(--muted); line-height:1.6; }
+  .guide-card .guide-read { font-size:12px; color:var(--red); font-weight:600; margin-top:12px; display:block; }
+  .guides-note { background:var(--cream); border:1px solid var(--border); border-radius:14px; padding:24px 28px; display:flex; align-items:center; gap:20px; }
+  .guides-note-icon { font-size:32px; flex-shrink:0; }
+  .guides-note h4 { font-size:16px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .guides-note p { font-size:13px; color:var(--muted); line-height:1.6; }
+  .guides-note a { color:var(--red); font-weight:600; text-decoration:none; }
+  @media(max-width:768px){ .guides-grid{grid-template-columns:1fr;}.guides{padding:50px 20px;} }
+  @media(max-width:1024px){ .guides{padding-left:40px;padding-right:40px;}.guides-grid{grid-template-columns:1fr 1fr;} }
+
+  /* ── UNDER CONSTRUCTION ── */
+  .uc-banner { background: linear-gradient(135deg, #1B2E4B 0%, #2d4a7a 100%); color: white; text-align: center; padding: 10px 20px; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; position: sticky; top: 0; z-index: 999; }
+  .uc-banner a { color: #f87171; font-weight: 700; text-decoration: none; margin-left: 8px; }
+  .uc-banner a:hover { text-decoration: underline; }
+  .uc-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); color: #fbbf24; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+  .uc-section { position: relative; }
+  .uc-section-overlay { position: absolute; inset: 0; background: rgba(248,247,244,0.75); backdrop-filter: blur(3px); z-index: 10; display: flex; align-items: center; justify-content: center; border-radius: 0; pointer-events: none; }
+  .uc-section-msg { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 20px 32px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.08); pointer-events: all; }
+  .uc-section-msg .uc-icon { font-size: 28px; margin-bottom: 8px; }
+  .uc-section-msg h4 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .uc-section-msg p { font-size: 13px; color: var(--muted); }
+  .uc-section-msg a { color: var(--red); font-weight: 600; font-size: 13px; margin-top: 10px; display: inline-block; text-decoration: none; }
+  .coming-soon-input { pointer-events: none; opacity: 0.5; cursor: not-allowed; }
+  .cs-tag { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+  .nav-cta .cs-tag { background: rgba(255,255,255,0.15); color: white; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.6s ease both; }
+  .hero-badge { animation-delay: 0.1s; } .hero h1 { animation-delay: 0.2s; } .hero-sub { animation-delay: 0.3s; } .hero-buttons { animation-delay: 0.4s; } .hero-stats { animation-delay: 0.5s; }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; display: block; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: white; z-index: 99; padding: 30px 24px;
+    flex-direction: column; gap: 0; overflow-y: auto;
+    border-top: 1px solid var(--border);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; padding: 16px 0; font-size: 18px; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:hover { color: var(--red); }
+  .mobile-menu .mobile-cta { margin-top: 24px; background: var(--red); color: white !important; text-align: center; padding: 16px; border-radius: 8px; font-weight: 700; border-bottom: none; font-size: 16px; }
+  .mobile-menu .mobile-socials { display: flex; gap: 20px; margin-top: 28px; padding-top: 24px; }
+  .mobile-menu .mobile-socials a { border-bottom: none; padding: 0; }
+  .mobile-menu .mobile-socials svg { width: 24px; height: 24px; fill: var(--muted); }
+  .mobile-menu .mobile-socials a:hover svg { fill: var(--navy); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .topbar { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 60px 40px; }
+    .hero-card { display: none; }
+    .pain-grid, .blog-grid, .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-panel.active { grid-template-columns: 1fr 1fr; }
+    .knowledge-grid, .calc-container, .services-split { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav, .pain, .stats, .services, .pricing, .calculator, .knowledge, .blog, .testimonials, .cta-banner, footer, .free-consult { padding-left: 40px; padding-right: 40px; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .pain-grid, .pricing-panel.active, .blog-grid, .testimonials-grid, .knowledge-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat-big { font-size: 36px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero { padding: 50px 20px; }
+    .hero h1 { font-size: 36px; }
+    .hero-stats { gap: 20px; flex-wrap: wrap; }
+    .hero-stats > div { min-width: 80px; }
+    .pain, .stats, .services, .pricing, .calculator, .knowledge, .blog, .testimonials, .cta-banner, footer { padding: 50px 20px; }
+    .free-consult { flex-direction: column; padding: 40px 20px; text-align: center; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .cta-buttons a { width: 100%; max-width: 320px; justify-content: center; }
+    .pricing-tabs { width: 100%; }
+    .ptab { flex: 1; font-size: 13px; padding: 10px 12px; }
+    .pricing-card.featured { transform: none; }
+    .pricing-card.featured:hover { transform: translateY(-3px); }
+    .section-title { font-size: 28px; margin-bottom: 32px; }
+    .calc-container { gap: 36px; }
+    .services-split { gap: 36px; }
+    .footer-grid { gap: 28px; }
+    .free-consult h3 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- UNDER CONSTRUCTION BANNER -->
+<div class="uc-banner">
+  🚧 Site under construction — Tax Calculator is live! Everything else coming soon.
+  <a href="#calculator">Try the calculator →</a>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="https://wa.me/48000000000">
+      <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="https://t.me/warsawexpathub">
+      <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Telegram
+    </a>
+    <a href="mailto:contact@expathub.pl">✉ contact@expathub.pl</a><span style="color:rgba(255,255,255,0.2)">|</span><a href="tel:+48000000000" title="Coming soon">📞 +48 XXX XXX XXX</a>
+  </div>
+  <div class="topbar-right">
+    <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="#" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo" title="Warsaw Expat Hub — Home">
+    <span class="logo-warsaw">Warsaw</span><span class="logo-expat">Expat</span><span class="logo-hub">Hub</span><span class="logo-dot"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services <span class="cs-tag">Soon</span></a></li>
+    <li><a href="#about">About Me <span class="cs-tag">Soon</span></a></li>
+    <li><a href="#pricing">Pricing <span class="cs-tag">Soon</span></a></li>
+    <li><a href="#guides">Free Guides <span class="cs-tag">Soon</span></a></li>
+    <li><a href="#calculator">Tax Calculator ✓</a> <a href="/calculator.html" style="font-size:11px;color:var(--red);font-weight:600;text-decoration:none;" title="Open calculator as standalone page">↗</a></li>
+    <li><a href="#blog">Blog <span class="cs-tag">Soon</span></a></li>
+    <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#about" onclick="closeMenu()">About Me</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#guides" onclick="closeMenu()">Free Guides</a>
+  <a href="#calculator" onclick="closeMenu()">Tax Calculator</a>
+  <a href="#blog" onclick="closeMenu()">Blog</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">📅 Book a Free Call</a>
+  <div class="mobile-socials">
+    <a href="#" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <a href="#" title="Telegram"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+    <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="pulse"></span> One person. Real help. No corporate nonsense.</div>
+    <h1>Your life in Warsaw,<br><em>sorted.</em><br>In English.</h1>
+    <p class="hero-sub">I'm an expat myself. I've been through all of this — karta pobytu, JDG, ZUS, the whole thing. Now I help others navigate it in plain English, and actually care about the outcome.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Chat with me →</a>
+      <a href="#guides" class="btn-outline">Free Guides</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">30<span>+</span></div><div class="stat-label">Expats helped</div></div>
+      <div><div class="stat-num">12<span>+</span></div><div class="stat-label">Countries</div></div>
+      <div><div class="stat-num">5<span>★</span></div><div class="stat-label">Average rating</div></div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hc-header">
+      <div class="hc-avatar">A</div>
+      <div><div class="hc-name">Alex M.</div><div class="hc-role">Software Engineer · UK → Warsaw</div></div>
+      <div class="hc-online"><span class="online-dot"></span> Active</div>
+    </div>
+    <div class="hc-items">
+      <div class="hc-item"><div class="hc-icon" style="background:rgba(230,57,70,0.1)">🏠</div><div><div class="hc-title">Karta Pobytu</div><div class="hc-sub">Approved ✓</div></div><div class="hc-check">✓</div></div>
+      <div class="hc-item"><div class="hc-icon" style="background:rgba(74,222,128,0.1)">💼</div><div><div class="hc-title">JDG Registration</div><div class="hc-sub">Done in 48h</div></div><div class="hc-check">✓</div></div>
+      <div class="hc-item"><div class="hc-icon" style="background:rgba(250,204,21,0.1)">🏦</div><div><div class="hc-title">Bank Account</div><div class="hc-sub">mBank opened</div></div><div class="hc-check">✓</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-block"><div class="stat-big">30<span>+</span></div><div class="stat-desc">Clients helped</div></div>
+    <div class="stat-block"><div class="stat-big">5<span>★</span></div><div class="stat-desc">Average rating</div></div>
+    <div class="stat-block"><div class="stat-big">20<span>+</span></div><div class="stat-desc">Residencies processed</div></div>
+    <div class="stat-block"><div class="stat-big">15<span>+</span></div><div class="stat-desc">Businesses registered</div></div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section class="uc-section pain" id="why">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">🔨</div>
+      <h4>Section coming soon</h4>
+      <p>Full content launching shortly. Follow us on Telegram for updates.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Why people choose me over agencies</div>
+  <h2 class="section-title">Small is a <em>feature,</em><br>not a bug.</h2>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-card-img" style="background-image:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80');background-color:#1B2E4B;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.75));display:flex;align-items:flex-end;padding:18px 22px;">
+          <span style="font-family:'Fraunces',serif;color:white;font-size:15px;font-weight:400;font-style:italic;opacity:0.9">Personal attention</span>
+        </div>
+      </div>
+      <div class="pain-card-body">
+        <h3>You talk to me, not a call centre</h3>
+        <p>When you message me, I reply — not a junior assistant reading from a script. I know your situation, remember your documents, and actually care whether you get approved.</p>
+        <div class="pain-solution">→ Direct WhatsApp/Telegram access, always</div>
+      </div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-img" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop&q=80');background-color:#2d3748;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.75));display:flex;align-items:flex-end;padding:18px 22px;">
+          <span style="font-family:'Fraunces',serif;color:white;font-size:15px;font-weight:400;font-style:italic;opacity:0.9">Honest about limits</span>
+        </div>
+      </div>
+      <div class="pain-card-body">
+        <h3>I won't take money for cases I can't win</h3>
+        <p>If your case needs a licensed attorney, I'll tell you honestly and connect you with the right specialist. No upselling, no false promises, no wasted money.</p>
+        <div class="pain-solution">→ Straight assessment at first call — free</div>
+      </div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&auto=format&fit=crop&q=80');background-color:#2d3748;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.75));display:flex;align-items:flex-end;padding:18px 22px;">
+          <span style="font-family:'Fraunces',serif;color:white;font-size:15px;font-weight:400;font-style:italic;opacity:0.9">More than paperwork</span>
+        </div>
+      </div>
+      <div class="pain-card-body">
+        <h3>More than just paperwork</h3>
+        <p>Need a flat, a bank account, a good neighbourhood? Confused about how things work here? I've been through all of it as an expat myself. I can help beyond the documents.</p>
+        <div class="pain-solution">→ From docs to daily life — I've got you</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="uc-section services" id="services">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">🛠️</div>
+      <h4>Services — coming soon</h4>
+      <p>Full service pages with pricing and booking are being prepared.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">What we do</div>
+  <h2 class="section-title">Services for <em>every expat.</em></h2>
+  <div class="services-split">
+    <div class="services-block">
+      <div class="services-block-label">For Individuals · <span style="color:var(--red)">click any service to see how it works</span></div>
+      <div class="services-block-title">Residency, <em>banking & more.</em></div>
+      <a href="#" onclick="openModal('karta');return false;" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
+        <div><div class="svc-name">Karta Pobytu (Temporary & Permanent)</div><div class="svc-desc">Full support from documents to submission at the Urząd</div></div>
+        <span class="svc-arrow" style="color:var(--red);font-size:12px;font-weight:700;">See how it works →</span>
+      </a>
+      <a href="#" onclick="openModal('pesel');return false;" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4m-4 4h8m-8 4h5"/><circle cx="17" cy="8" r="1" fill="var(--red)"/></svg></span>
+        <div><div class="svc-name">PESEL & Meldunek</div><div class="svc-desc">Getting your Polish identity number and registration</div></div>
+        <span class="svc-arrow" style="color:var(--red);font-size:12px;font-weight:700;">See how it works →</span>
+      </a>
+      <a href="#" onclick="openModal('bank');return false;" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></span>
+        <div><div class="svc-name">Bank Account Opening</div><div class="svc-desc">Which banks accept foreigners and how to apply successfully</div></div>
+        <span class="svc-arrow" style="color:var(--red);font-size:12px;font-weight:700;">See how it works →</span>
+      </a>
+      <a href="#" onclick="openModal('tax');return false;" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 12l3 3 7-7"/></svg></span>
+        <div><div class="svc-name">Tax Consultation</div><div class="svc-desc">UoP vs B2B, PIT filing, ZUS — with a certified accountant</div></div>
+        <span class="svc-arrow" style="color:var(--red);font-size:12px;font-weight:700;">See how it works →</span>
+      </a>
+    </div>
+    <div class="services-block">
+      <div class="services-block-label">For Freelancers & Business · <span style="color:var(--red)">click to see the process</span></div>
+      <div class="services-block-title">Register, invoice, <em>operate.</em></div>
+      <a href="#" onclick="openModal('jdg');return false;" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>
+        <div><div class="svc-name">JDG Registration</div><div class="svc-desc">End-to-end setup via biznes.gov.pl with PKD code selection</div></div>
+        <span class="svc-arrow" style="color:var(--red);font-size:12px;font-weight:700;">See how it works →</span>
+      </a>
+      <a href="#pricing" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
+        <div><div class="svc-name">Profil Zaufany Setup</div><div class="svc-desc">Your digital identity for all Polish government services</div></div>
+        <span class="svc-arrow">→</span>
+      </a>
+      <a href="#pricing" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span>
+        <div><div class="svc-name">ZUS Registration</div><div class="svc-desc">Social contributions setup with tax-optimised options</div></div>
+        <span class="svc-arrow">→</span>
+      </a>
+      <a href="#pricing" class="svc-item">
+        <span class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" style="width:22px;height:22px"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+        <div><div class="svc-name">Ongoing Accountant Support</div><div class="svc-desc">Monthly bookkeeping via our vetted accountant partner</div></div>
+        <span class="svc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- REMOTE SERVICES -->
+<section class="uc-section remote" id="remote">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">🗺️</div>
+      <h4>Remote & Concierge — coming soon</h4>
+      <p>This section is being prepared. Contact us directly to discuss your needs.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Remote & Concierge Services</div>
+  <h2 class="section-title">Need something done in Warsaw<br><em>while you're away?</em></h2>
+  <p class="remote-sub">Not in Warsaw yet, or temporarily abroad? We act as your trusted person on the ground — handling errands, documents, and anything that needs a physical presence in the city.</p>
+  <div class="remote-grid">
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1523860939-8aa6a5d4f1b5?w=600&auto=format&fit=crop&q=80');background-color:#d0d8e0;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Mailbox & Docs</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Mailbox & Document Check</h3>
+        <p>We visit your address, collect mail, photograph everything and send you scans. Important letters from ZUS, Urząd, or tax office won't pile up unread.</p>
+        <div class="remote-price">from zł49</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&auto=format&fit=crop&q=80');background-color:#c9cdd4;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Print & Submit</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Print, Sign & Submit</h3>
+        <p>You send us a file, we print it, get it signed if needed, and submit to the right office. Perfect for ZUS declarations, PIT filings, Urząd applications.</p>
+        <div class="remote-price">from zł79</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80');background-color:#b8c4cc;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Apartment Viewing</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Apartment Viewing</h3>
+        <p>Moving to Warsaw but can't visit in person? We attend viewings on your behalf, film a detailed walkthrough, check the condition, and give you an honest assessment.</p>
+        <div class="remote-price">from zł149 / viewing</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&auto=format&fit=crop&q=80');background-color:#c8d0d8;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Key Handover</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Key Handover & Check-in</h3>
+        <p>We meet your landlord, tenant, or guest, handle the key handover, and document the apartment condition with photos. Useful for property owners abroad.</p>
+        <div class="remote-price">from zł99</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1504439468489-c8920d796a29?w=600&auto=format&fit=crop&q=80');background-color:#bec7d2;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Queue Waiting</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Queue & Appointment Waiting</h3>
+        <p>Hate waiting at the Urząd or ZUS? We show up, take a number, wait in line, and call you when it's almost your turn — or represent you with a power of attorney.</p>
+        <div class="remote-price">from zł99 / hr</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80');background-color:#c5cdd6;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Parcel Handling</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Package & Parcel Handling</h3>
+        <p>Receive a delivery, forward a parcel to your address abroad, or drop something off at a courier point. We're your Warsaw hands when you need them.</p>
+        <div class="remote-price">from zł49</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80');background-color:#bec8d0;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Contractor Supervision</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Contractor Supervision</h3>
+        <p>Having work done in your apartment but you're not in the city? We meet the contractor, supervise the job, and report back with photos and video.</p>
+        <div class="remote-price">from zł149</div>
+      </div>
+    </div>
+
+    <div class="remote-card">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=600&auto=format&fit=crop&q=80');background-color:#b8c3cd;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.15),rgba(27,46,75,0.7))"><span class="remote-card-img-label">Bank & Office</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Bank & Office Errands</h3>
+        <p>Submitting a form at the bank, collecting a document, checking on a status in person — small tasks that are easy for us but impossible when you're abroad.</p>
+        <div class="remote-price">from zł79</div>
+      </div>
+    </div>
+
+    <div class="remote-card remote-card-cta">
+      <div class="remote-card-img" style="background-image:url('https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=600&auto=format&fit=crop&q=80');background-color:#1B2E4B;">
+        <div class="remote-card-img-overlay" style="background:linear-gradient(to bottom,rgba(27,46,75,0.45),rgba(27,46,75,0.9))"><span class="remote-card-img-label">Warsaw, always close</span></div>
+      </div>
+      <div class="remote-card-body">
+        <h3>Something else?</h3>
+        <p>Don't see what you need? Describe your situation and we'll tell you if we can help. Most reasonable requests — we can figure out.</p>
+        <a href="#contact" class="btn-primary" style="margin-top:12px;display:inline-block;font-size:14px;padding:11px 20px">Ask us →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FREE CONSULT BANNER -->
+<div class="free-consult">
+  <div>
+    <h3>Not sure where to start? Get a <em>free consultation.</em></h3>
+    <p>15 minutes, no commitment. We'll tell you exactly what you need and how we can help.</p>
+  </div>
+  <a href="#contact" class="btn-white">Book Free Call →</a>
+</div>
+
+<!-- PRICING -->
+<section class="uc-section uc-section pricing" id="pricing">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">💰</div>
+      <h4>Pricing — coming soon</h4>
+      <p>Packages and pricing are being finalised.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">📅</div>
+      <h4>Booking — coming soon</h4>
+      <p>Online booking is being set up. For now, reach out via WhatsApp or Telegram.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Transparent pricing · All prices in PLN</div>
+  <h2 class="section-title">Choose your <em>package.</em></h2>
+  <div class="pricing-tabs">
+    <button class="ptab active" onclick="showTab('residency',this)">Residency</button>
+    <button class="ptab" onclick="showTab('business',this)">Business</button>
+    <button class="ptab" onclick="showTab('bundles',this)">Bundles</button>
+  </div>
+
+  <div class="pricing-panel active" id="tab-residency">
+    <div class="pricing-card">
+      <div class="pricing-name">Quick Start</div>
+      <div class="pricing-price"><sup>zł</sup>199</div>
+      <div class="pricing-desc">Just arrived and need clarity on what to do first.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>45-min onboarding call</li><li>Personalised document checklist</li><li>3 days WhatsApp support</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pop-badge">Most Popular</div>
+      <div class="pricing-name">Residency Assist</div>
+      <div class="pricing-price"><sup>zł</sup>749</div>
+      <div class="pricing-desc">Full karta pobytu support from document prep to decision.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Complete document review</li><li>Appointment booking at Urząd</li><li>Step-by-step submission guide</li><li>2 weeks priority support</li><li>Follow-up until approved</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Family Package</div>
+      <div class="pricing-price"><sup>zł</sup>1199</div>
+      <div class="pricing-desc">Residency support for you and your spouse or family member.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Everything in Residency Assist</li><li>Spouse / partner included</li><li>Family reunification guidance</li><li>1 month chat support</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+  </div>
+
+  <div class="pricing-panel" id="tab-business">
+    <div class="pricing-card">
+      <div class="pricing-name">Tax Consultation</div>
+      <div class="pricing-price"><sup>zł</sup>199</div>
+      <div class="pricing-desc">1-hour session with our accountant. UoP vs B2B, ZUS, PIT explained.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>60 min with certified accountant</li><li>UoP vs B2B comparison</li><li>Tax regime recommendation</li><li>Written summary via email</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pop-badge">Most Popular</div>
+      <div class="pricing-name">Business Setup</div>
+      <div class="pricing-price"><sup>zł</sup>1249</div>
+      <div class="pricing-desc">Everything to legally start freelancing or run your business in Poland.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>JDG registration end-to-end</li><li>Bank account opening help</li><li>Profil Zaufany setup</li><li>ZUS registration guidance</li><li>Tax regime selection with accountant</li><li>2 weeks support</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Ongoing Accounting</div>
+      <div class="pricing-price"><sup>zł</sup>399<span class="per">/mo</span></div>
+      <div class="pricing-desc">Monthly bookkeeping and ZUS filings via our accountant partner.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Monthly PIT/ZUS filings</li><li>Invoice tracking</li><li>Tax deadline reminders</li><li>Email Q&A support</li></ul>
+      <a href="#contact" class="btn-book">Enquire →</a>
+    </div>
+  </div>
+
+  <div class="pricing-panel" id="tab-bundles">
+    <div class="pricing-card">
+      <div class="pricing-name">Soft Landing</div>
+      <div class="pricing-price"><sup>zł</sup>1749</div>
+      <div class="pricing-desc">Residency + Business combined. The essentials to get started in Warsaw.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Karta pobytu support</li><li>JDG registration</li><li>Bank account help</li><li>Tax consultation (1h)</li><li>Save zł249 vs. separate</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pop-badge">Best Value</div>
+      <div class="pricing-name">All-Inclusive</div>
+      <div class="pricing-price"><sup>zł</sup>2899</div>
+      <div class="pricing-desc">Maximum support. Everything from residency to running your business.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Full residency support</li><li>Business Setup package</li><li>3 months ongoing accounting</li><li>1 month priority WhatsApp</li><li>Housing & local tips</li></ul>
+      <a href="#contact" class="btn-book">Book →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Corporate Relocation</div>
+      <div class="pricing-price" style="font-size:26px;padding-top:6px;line-height:1.3">On<br>request</div>
+      <div class="pricing-desc">For companies relocating staff to Warsaw. B2B invoice available.</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features"><li>Team residency processing</li><li>HR department liaison</li><li>Business setup for employees</li><li>B2B contract available</li></ul>
+      <a href="#contact" class="btn-book">Contact Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TAX CALCULATOR -->
+<section class="calculator-section" id="calculator">
+<style>
+
+  :root {
+    --navy: #1B2E4B;
+    --red: #E63946;
+    --cream: #F8F7F4;
+    --border: #E8E6E1;
+    --muted: #6B7280;
+    --text: #1a1a2e;
+    --green: #16a34a;
+    --blue: #2563eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--text); }
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+  .calc-wrapper { max-width: 960px; margin: 0 auto; padding: 48px 20px; }
+  
+  .calc-header { text-align: center; margin-bottom: 40px; }
+  .calc-header .label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+  .calc-header h1 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 300; color: var(--navy); line-height: 1.2; margin-bottom: 12px; }
+  .calc-header h1 em { font-style: italic; }
+  .calc-header p { font-size: 15px; color: var(--muted); max-width: 540px; margin: 0 auto; line-height: 1.6; }
+
+  /* MODE SWITCHER */
+  .mode-tabs { display: flex; background: white; border: 1px solid var(--border); border-radius: 14px; padding: 5px; gap: 4px; margin-bottom: 28px; }
+  .mode-tab { flex: 1; padding: 12px; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; color: var(--muted); transition: all 0.2s; }
+  .mode-tab.active { background: var(--navy); color: white; }
+
+  /* MAIN GRID */
+  .calc-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
+  
+  /* INPUT PANEL */
+  .input-panel { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 22px; }
+  .field-group label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .field-group label span { font-weight: 400; text-transform: none; letter-spacing: 0; color: #9ca3af; }
+  .input-wrap { position: relative; }
+  .input-wrap input, .input-wrap select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 16px; font-weight: 600; color: var(--navy); background: var(--cream); outline: none; transition: border-color 0.2s; appearance: none; }
+  .input-wrap input:focus, .input-wrap select:focus { border-color: var(--navy); background: white; }
+  .input-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--muted); pointer-events: none; }
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; }
+  .toggle-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .toggle-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: #d1d5db; border-radius: 24px; cursor: pointer; transition: 0.2s; }
+  .slider:before { content: ''; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.2s; }
+  input:checked + .slider { background: var(--navy); }
+  input:checked + .slider:before { transform: translateX(20px); }
+  .divider { height: 1px; background: var(--border); }
+  .range-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .range-display { display: flex; justify-content: space-between; align-items: center; }
+  .range-val { font-size: 20px; font-weight: 700; color: var(--navy); font-family: 'Fraunces', serif; }
+  input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 4px; background: var(--border); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+
+  /* RESULTS PANEL */
+  .results-panel { display: flex; flex-direction: column; gap: 16px; }
+
+  /* NET SALARY CARD */
+  .net-card { background: var(--navy); border-radius: 16px; padding: 28px; color: white; position: relative; overflow: hidden; }
+  .net-card::before { content: ''; position: absolute; width: 200px; height: 200px; background: radial-gradient(circle, rgba(230,57,70,0.2) 0%, transparent 70%); top: -60px; right: -40px; pointer-events: none; }
+  .net-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .net-amount { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 700; color: white; line-height: 1; margin-bottom: 4px; }
+  .net-amount span { font-size: 22px; font-weight: 400; opacity: 0.7; }
+  .net-sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+  .net-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .net-stat { }
+  .net-stat-val { font-size: 18px; font-weight: 700; color: white; font-family: 'Fraunces', serif; }
+  .net-stat-val.green { color: #4ade80; }
+  .net-stat-val.red { color: #f87171; }
+  .net-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* BREAKDOWN CARD */
+  .breakdown-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .breakdown-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+  .breakdown-rows { display: flex; flex-direction: column; gap: 0; }
+  .brow { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .brow:last-child { border-bottom: none; }
+  .brow.group-header { padding: 14px 0 6px; border-bottom: none; }
+  .brow.subtotal { background: var(--cream); margin: 0 -8px; padding: 10px 8px; border-radius: 8px; border: none; margin-bottom: 4px; }
+  .brow-left { display: flex; flex-direction: column; gap: 2px; }
+  .brow-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .brow-rate { font-size: 11px; color: var(--muted); }
+  .brow-amount { font-size: 14px; font-weight: 700; white-space: nowrap; }
+  .brow-amount.deduction { color: var(--red); }
+  .brow-amount.positive { color: var(--green); }
+  .brow-amount.neutral { color: var(--navy); }
+  .group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  /* COMPARE CARD */
+  .compare-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .compare-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .compare-col { border: 1.5px solid var(--border); border-radius: 12px; padding: 16px; transition: all 0.2s; }
+  .compare-col.best { border-color: var(--navy); background: #f0f4ff; }
+  .compare-col-header { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .best-badge { background: var(--navy); color: white; font-size: 9px; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.05em; }
+  .compare-net { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .compare-diff { font-size: 12px; font-weight: 600; }
+  .compare-diff.up { color: var(--green); }
+  .compare-diff.down { color: var(--red); }
+  .compare-rows { margin-top: 12px; display: flex; flex-direction: column; gap: 5px; }
+  .cr { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  .cr span:last-child { color: var(--text); font-weight: 500; }
+
+  /* EMPLOYER COST */
+  .employer-card { background: #fff8f0; border: 1px solid #fed7aa; border-radius: 16px; padding: 24px; }
+  .employer-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #92400e; margin-bottom: 16px; }
+  .employer-total { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: #92400e; margin-bottom: 16px; }
+  .employer-rows { display: flex; flex-direction: column; gap: 8px; }
+  .er { display: flex; justify-content: space-between; font-size: 13px; }
+  .er-name { color: var(--muted); }
+  .er-amount { font-weight: 600; color: var(--text); }
+
+  /* NOTE BOX */
+  .note-box { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .note-box strong { color: var(--text); }
+
+  /* B2B SPECIFIC */
+  .b2b-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .regime-btn { padding: 10px 6px; border: 1.5px solid var(--border); border-radius: 10px; background: white; font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer; text-align: center; transition: all 0.2s; }
+  .regime-btn.active { border-color: var(--navy); background: var(--navy); color: white; }
+
+  @media (max-width: 768px) {
+    .calc-grid { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .net-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+.calculator-section { background: var(--cream); padding: 60px; }
+@media(max-width:768px){ .calculator-section{ padding: 30px 16px; } }
+</style>
+<div class="calc-wrapper">
+
+  <div class="calc-header">
+    <div class="label">🇵🇱 2024 · Updated for Polish Deal</div>
+    <h1>Polish Salary Calculator<br><em>UoP vs B2B — real numbers</em></h1>
+    <p>Enter your gross salary or B2B rate and see exactly where your money goes — every contribution, every deduction, explained in English.</p>
+  </div>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('uop', this)">🏢 UoP (Employment contract)</button>
+    <button class="mode-tab" onclick="setMode('b2b', this)">💼 B2B / JDG (Self-employed)</button>
+    <button class="mode-tab" onclick="setMode('zlecenie', this)">📝 Umowa Zlecenia</button>
+    <button class="mode-tab" onclick="setMode('compare', this)">⚖️ Compare all</button>
+  </div>
+
+  <div id="panelUop">
+    <div class="calc-grid">
+      <!-- INPUT -->
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Gross monthly salary <span>(brutto)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="uopGross" value="10000" oninput="onUopGrossInput(this.value)" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="rangeVal">10 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="10000" id="salaryRange" oninput="syncRange(this.value)" list="tickmarks">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>0</span><span>50k</span><span>100k</span><span>150k</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Commuter deduction</div>
+            <div class="toggle-sub">300 PLN/month instead of 250 — if you live outside Warsaw</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="commuter" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Mid-year join (before July)</div>
+            <div class="toggle-sub">Affects annual free amount calculations</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="midyear" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Under 26 — ZIT relief</div>
+            <div class="toggle-sub">No income tax up to 85,528 PLN/year</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="under26" onchange="calcUop()"><span class="slider"></span></label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="note-box">
+          <strong>UoP = Umowa o Pracę</strong> — standard employment contract. Your employer pays you a gross salary. ZUS and tax are deducted at source. You pay part of ZUS; your employer pays another part on top.
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="results-panel">
+        <!-- NET -->
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home</div>
+          <div class="net-amount" id="uopNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="uopNetSub">— net (netto)</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="uopTotalDeductions">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopEffRate">0%</div>
+              <div class="net-stat-label">Effective tax rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="uopAnnualGross">0 PLN</div>
+              <div class="net-stat-label">Annual gross</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BREAKDOWN -->
+        <div class="breakdown-card">
+          <div class="breakdown-title">
+            <span>Full breakdown</span>
+            <span style="font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">employee view</span>
+          </div>
+          <div class="breakdown-rows">
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Gross salary</div><div class="brow-rate">brutto</div></div>
+              <div class="brow-amount neutral" id="b_gross">0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Employee ZUS contributions</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Pension (emerytalne)</div><div class="brow-rate">9.76% of gross</div></div>
+              <div class="brow-amount deduction" id="b_pension">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Disability (rentowe)</div><div class="brow-rate">1.5% of gross</div></div>
+              <div class="brow-amount deduction" id="b_disability">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Sickness (chorobowe)</div><div class="brow-rate">2.45% of gross</div></div>
+              <div class="brow-amount deduction" id="b_sickness">− 0 PLN</div>
+            </div>
+            <div class="brow subtotal">
+              <div class="brow-left"><div class="brow-name" style="font-weight:700">Total employee ZUS</div></div>
+              <div class="brow-amount deduction" id="b_zusTotalEmp">− 0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Health insurance (NFZ)</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Health contribution</div><div class="brow-rate">9% of (gross − employee ZUS) · not tax-deductible since 2022</div></div>
+              <div class="brow-amount deduction" id="b_health">− 0 PLN</div>
+            </div>
+
+            <div class="brow group-header"><div class="group-label">🔴 Income tax (PIT)</div></div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">gross − ZUS employee − kosztyu uzyskania (250/300 PLN)</div></div>
+              <div class="brow-amount neutral" id="b_taxBase">0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax before relief</div><div class="brow-rate" id="b_taxRateLabel">12% (threshold: 120 000 PLN/year)</div></div>
+              <div class="brow-amount deduction" id="b_taxBeforeRelief">− 0 PLN</div>
+            </div>
+            <div class="brow">
+              <div class="brow-left"><div class="brow-name">Tax-free allowance relief</div><div class="brow-rate">300 PLN/month (30 000 PLN/year free amount)</div></div>
+              <div class="brow-amount positive" id="b_taxRelief">+ 0 PLN</div>
+            </div>
+            <div class="brow subtotal">
+              <div class="brow-left"><div class="brow-name" style="font-weight:700">Income tax payable</div></div>
+              <div class="brow-amount deduction" id="b_taxFinal">− 0 PLN</div>
+            </div>
+
+            <div class="brow" style="padding:16px 0 4px;border-bottom:none">
+              <div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net salary (netto)</div></div>
+              <div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)" id="b_net">0 PLN</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMPLOYER COST -->
+        <div class="employer-card">
+          <div class="employer-title">💼 What your employer actually pays</div>
+          <div class="employer-total" id="emp_total">0 PLN / month</div>
+          <div class="employer-rows">
+            <div class="er"><span class="er-name">Your gross salary</span><span class="er-amount" id="emp_gross">0 PLN</span></div>
+            <div class="er"><span class="er-name">Pension (emerytalne) — 9.76%</span><span class="er-amount" id="emp_pension">0 PLN</span></div>
+            <div class="er"><span class="er-name">Disability (rentowe) — 6.5%</span><span class="er-amount" id="emp_disability">0 PLN</span></div>
+            <div class="er"><span class="er-name">Accident insurance (wypadkowe) — 1.67%</span><span class="er-amount" id="emp_accident">0 PLN</span></div>
+            <div class="er"><span class="er-name">Labour Fund (FP) — 2.45%</span><span class="er-amount" id="emp_fp">0 PLN</span></div>
+            <div class="er"><span class="er-name">FGŚP — 0.10%</span><span class="er-amount" id="emp_fgsp">0 PLN</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2B PANEL -->
+  <div id="panelB2b" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Monthly B2B revenue <span>(net invoice)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="b2bRevenue" value="15000" oninput="onB2bInput(this.value)" min="0" step="500">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Monthly business costs</label>
+          <div class="input-wrap">
+            <input type="number" id="b2bCosts" value="500" oninput="calcB2b()" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>Tax regime</label>
+          <div class="b2b-options">
+            <button class="regime-btn active" onclick="setRegime('skala',this)">Skala<br><span style="font-size:10px;font-weight:400">12% / 32%</span></button>
+            <button class="regime-btn" onclick="setRegime('liniowy',this)">Liniowy<br><span style="font-size:10px;font-weight:400">19% flat</span></button>
+            <button class="regime-btn" onclick="setRegime('ryczalt',this)">Ryczałt<br><span style="font-size:10px;font-weight:400">varies</span></button>
+          </div>
+        </div>
+
+        <div id="ryczaltField" style="display:none">
+          <div class="field-group">
+            <label>Ryczałt rate <span>(depends on your PKD)</span></label>
+            <div class="input-wrap">
+              <select id="ryczaltRate" onchange="calcB2b()">
+                <option value="0.08">8.5% — IT, programming services</option>
+                <option value="0.12">12% — most other services</option>
+                <option value="0.15">15% — financial, real estate</option>
+                <option value="0.17">17% — liberal professions</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>ZUS contributions</label>
+          <div class="input-wrap">
+            <select id="zusType" onchange="calcB2b()">
+              <option value="preferential">Preferential (preferencyjny) — first 24 months: ~400 PLN/month</option>
+              <option value="standard" selected>Standard rate — ~1 600 PLN/month</option>
+              <option value="maly">Mały ZUS Plus — income-based, ~500–1 200 PLN/month</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">VAT payer</div>
+            <div class="toggle-sub">Revenue shown is net of VAT (already excluded)</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="vatPayer"><span class="slider"></span></label>
+        </div>
+
+        <div class="note-box">
+          <strong>B2B = JDG (sole proprietorship)</strong> — you invoice your client, pay ZUS yourself, and choose your tax regime. More flexibility, more admin. Often higher take-home at same income level.
+        </div>
+      </div>
+
+      <div class="results-panel">
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home (B2B)</div>
+          <div class="net-amount" id="b2bNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="b2bNetSub">— after ZUS, health and income tax</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="b2bTotalDeductions">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bEffRate">0%</div>
+              <div class="net-stat-label">Effective rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="b2bZusMonthly">0 PLN</div>
+              <div class="net-stat-label">Your ZUS/month</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown-card">
+          <div class="breakdown-title"><span>Full breakdown (B2B)</span></div>
+          <div class="breakdown-rows" id="b2bBreakdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- UMOWA ZLECENIA PANEL -->
+  <div id="panelZlecenie" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Gross monthly rate <span>(brutto)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="zlGross" value="8000" oninput="onZlInput(this.value)" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="zlRangeVal">8 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="8000" id="zlRange" oninput="syncZlRange(this.value)" list="tickmarks">
+          <datalist id="tickmarks"><option value="0"><option value="10000"><option value="20000"><option value="30000"><option value="40000"><option value="50000"><option value="60000"><option value="70000"><option value="80000"><option value="90000"><option value="100000"><option value="120000"><option value="150000"></datalist><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>0</span><span>50k</span><span>100k</span><span>150k</span></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field-group">
+          <label>ZUS situation</label>
+          <div class="input-wrap">
+            <select id="zlZusSit" onchange="calcZlecenie()">
+              <option value="main">Main / only source of income — full ZUS applies</option>
+              <option value="additional">Additional job — already paying ZUS elsewhere (only health)</option>
+              <option value="student">Student under 26 — no ZUS, no health contribution</option>
+              <option value="retired">Pensioner — no ZUS social, only health</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Voluntary sickness insurance</div>
+            <div class="toggle-sub">2.45% — not mandatory on Zlecenie, but gives sick pay entitlement</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="zlSickness" onchange="calcZlecenie()"><span class="slider"></span></label>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Under 26 — ZIT relief</div>
+            <div class="toggle-sub">No income tax up to 85,528 PLN/year</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="zlUnder26" onchange="calcZlecenie()"><span class="slider"></span></label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="note-box">
+          <strong>Umowa Zlecenia</strong> (civil law / mandate contract) is common for contractors, part-timers, and students. It's <em>not</em> an employment contract — no paid holidays, no notice period, no sick pay unless you opt in. Tax uses <strong>20% cost deduction</strong> (koszty uzyskania) instead of the fixed 250 PLN used in UoP.
+        </div>
+      </div>
+
+      <div class="results-panel">
+        <div class="net-card">
+          <div class="net-label">Your monthly take-home (Zlecenie)</div>
+          <div class="net-amount" id="zlNet">0 <span>PLN</span></div>
+          <div class="net-sub" id="zlNetSub">— net (netto)</div>
+          <div class="net-grid">
+            <div class="net-stat">
+              <div class="net-stat-val red" id="zlTotalDed">0 PLN</div>
+              <div class="net-stat-label">Total deductions</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlEffRate">0%</div>
+              <div class="net-stat-label">Effective rate</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlAnnualNet">0 PLN</div>
+              <div class="net-stat-label">Annual net (est.)</div>
+            </div>
+            <div class="net-stat">
+              <div class="net-stat-val" id="zlAnnualGross">0 PLN</div>
+              <div class="net-stat-label">Annual gross</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown-card">
+          <div class="breakdown-title">
+            <span>Full breakdown</span>
+            <span style="font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">employee view</span>
+          </div>
+          <div class="breakdown-rows" id="zlBreakdown"></div>
+        </div>
+
+        <div class="breakdown-card" style="border-color:#fed7aa;background:#fff8f0">
+          <div class="breakdown-title" style="color:#92400e">💼 Employer cost (Zlecenie)</div>
+          <div class="breakdown-rows" id="zlEmployerBreakdown"></div>
+        </div>
+
+        <div class="note-box">
+          <strong>Key differences vs UoP:</strong> No guaranteed holidays, no sick pay (unless you opt in to sickness insurance), no severance. But easier to terminate. Often used for project-based work. <strong>Watch out:</strong> if you work like a regular employee (fixed hours, one employer, personal service), Polish courts can reclassify it as UoP — giving you all employment rights retroactively.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARE PANEL -->
+  <div id="panelCompare" style="display:none">
+    <div class="calc-grid">
+      <div class="input-panel">
+        <div class="field-group">
+          <label>Your gross / B2B rate <span>(same amount, both scenarios)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="cmpAmount" value="12000" oninput="onCmpInput(this.value)" min="0" step="500">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+        <div class="range-wrap">
+          <div class="range-display">
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Quick pick</span>
+            <span class="range-val" id="cmpRangeVal">12 000 PLN</span>
+          </div>
+          <input type="range" min="0" max="150000" step="1000" value="12000" id="cmpRange" oninput="syncCmpRange(this.value)" list="tickmarks">
+        </div>
+        <div class="divider"></div>
+        <div class="field-group">
+          <label>B2B monthly costs</label>
+          <div class="input-wrap">
+            <input type="number" id="cmpCosts" value="500" oninput="calcCompare()" min="0" step="100">
+            <span class="input-suffix">PLN</span>
+          </div>
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          This comparison uses <strong>the same amount</strong> as both UoP gross and B2B monthly invoice. In reality your B2B rate should be higher than your UoP gross to cover ZUS, holidays and risks you bear yourself.
+        </div>
+      </div>
+
+      <div class="results-panel" id="compareResults"></div>
+    </div>
+  </div>
+
+  <p style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:20px;padding:14px 16px;background:white;border-radius:10px;border:1px solid var(--border)">
+    <strong>Disclaimer:</strong> This calculator provides estimates for informational purposes only and does not constitute tax or legal advice. Polish tax law changes frequently — always verify with a certified accountant (doradca podatkowy) before making financial decisions. WarsawExpatHub accepts no liability for decisions made based on these calculations. ZUS rates shown are for 2024; health contribution rules follow the Polish Deal (Nowy Ład). <a href="#contact" style="color:var(--red)">Get a real consultation →</a>
+  </p>
+
+</div>
+<script>
+
+  let currentRegime = 'skala';
+  let currentMode = 'uop';
+  let sharedAmount = 10000; // synced across tabs
+
+  function fmt(n) { return Math.round(n).toLocaleString('pl-PL') + ' PLN'; }
+  function fmtNum(n) { return Math.round(n).toLocaleString('pl-PL'); }
+  function fmtPct(n) { return (n*100).toFixed(1) + '%'; }
+  function el(id) { return document.getElementById(id); }
+
+
+  // ── CROSS-TAB SYNC ───────────────────────────────────────────────────────
+  function setSharedAmount(v) {
+    sharedAmount = parseFloat(v) || 0;
+    const clamped = Math.min(150000, Math.max(0, sharedAmount));
+    // UoP
+    if (el('uopGross')) { el('uopGross').value = sharedAmount; el('salaryRange').value = clamped; el('rangeVal').textContent = formatRangeLabel(sharedAmount); }
+    // B2B
+    if (el('b2bRevenue')) el('b2bRevenue').value = sharedAmount;
+    // Zlecenie
+    if (el('zlGross')) { el('zlGross').value = sharedAmount; el('zlRange').value = clamped; el('zlRangeVal').textContent = formatRangeLabel(sharedAmount); }
+    // Compare
+    if (el('cmpAmount')) { el('cmpAmount').value = sharedAmount; el('cmpRange').value = clamped; el('cmpRangeVal').textContent = formatRangeLabel(sharedAmount); }
+  }
+
+  function formatRangeLabel(v) {
+    return Math.round(v).toLocaleString('pl-PL') + ' PLN';
+  }
+
+  function onUopGrossInput(v)  { setSharedAmount(v); calcUop(); }
+  function onB2bInput(v)       { setSharedAmount(v); calcB2b(); }
+  function onZlInput(v)        { setSharedAmount(v); calcZlecenie(); }
+  function onCmpInput(v)       { setSharedAmount(v); calcCompare(); }
+
+  function setMode(mode, btn) {
+    currentMode = mode;
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    el('panelUop').style.display = mode === 'uop' ? '' : 'none';
+    el('panelB2b').style.display = mode === 'b2b' ? '' : 'none';
+    if(el('panelZlecenie')) el('panelZlecenie').style.display = mode === 'zlecenie' ? '' : 'none';
+    el('panelCompare').style.display = mode === 'compare' ? '' : 'none';
+    // Propagate current shared amount to newly visible panel
+    setSharedAmount(sharedAmount);
+    if (mode === 'b2b') calcB2b();
+    else if (mode === 'zlecenie') calcZlecenie();
+    else if (mode === 'compare') calcCompare();
+    else calcUop();
+  }
+
+  function syncRange(v) { setSharedAmount(v); calcUop(); }
+  function syncCmpRange(v) { setSharedAmount(v); calcCompare(); }
+
+  function setRegime(r, btn) {
+    currentRegime = r;
+    document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    el('ryczaltField').style.display = r === 'ryczalt' ? '' : 'none';
+    calcB2b();
+  }
+
+  function calcUop() {
+    const gross = parseFloat(el('uopGross').value) || 0;
+    const commuter = el('commuter').checked;
+    const under26 = el('under26').checked;
+
+    // Employee ZUS
+    const pension = gross * 0.0976;
+    const disability = gross * 0.015;
+    const sickness = gross * 0.0245;
+    const zusEmp = pension + disability + sickness;
+
+    // Health (9% of gross - ZUS employee, not deductible)
+    const healthBase = gross - zusEmp;
+    const health = healthBase * 0.09;
+
+    // Tax base
+    const kup = commuter ? 300 : 250;
+    const taxBase = Math.max(0, gross - zusEmp - kup);
+
+    // Tax
+    let taxAnnual = taxBase * 12;
+    let tax = 0;
+    if (!under26) {
+      if (taxAnnual <= 120000) {
+        tax = taxBase * 0.12;
+      } else {
+        // Monthly approximation
+        const monthly120 = 120000/12;
+        if (taxBase <= monthly120) {
+          tax = taxBase * 0.12;
+        } else {
+          tax = monthly120 * 0.12 + (taxBase - monthly120) * 0.32;
+        }
+      }
+      // Free amount relief: 300/month (for income up to ~85k/year gross)
+      const relief = taxBase > 0 ? 300 : 0;
+      tax = Math.max(0, tax - relief);
+    }
+
+    const net = gross - zusEmp - health - tax;
+    const totalDeductions = zusEmp + health + tax;
+    const effRate = gross > 0 ? totalDeductions / gross : 0;
+
+    // Display
+    el('uopNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('uopNetSub').textContent = gross > 0 ? '≈ ' + (net/gross*100).toFixed(1) + '% of gross salary' : '';
+    el('uopTotalDeductions').textContent = '−' + fmt(totalDeductions);
+    el('uopEffRate').textContent = fmtPct(effRate);
+    el('uopAnnualNet').textContent = fmt(net * 12);
+    el('uopAnnualGross').textContent = fmt(gross * 12);
+
+    // Breakdown
+    el('b_gross').textContent = fmt(gross);
+    el('b_pension').textContent = '− ' + fmt(pension);
+    el('b_disability').textContent = '− ' + fmt(disability);
+    el('b_sickness').textContent = '− ' + fmt(sickness);
+    el('b_zusTotalEmp').textContent = '− ' + fmt(zusEmp);
+    el('b_health').textContent = '− ' + fmt(health);
+    el('b_taxBase').textContent = fmt(taxBase);
+    el('b_taxBeforeRelief').textContent = '− ' + fmt(taxBase <= 120000/12 ? taxBase*0.12 : (120000/12)*0.12+(taxBase-120000/12)*0.32);
+    el('b_taxRelief').textContent = under26 ? '+ 300 PLN (ZIT relief)' : '+ 300 PLN';
+    el('b_taxFinal').textContent = '− ' + fmt(tax);
+    el('b_net').textContent = fmt(net);
+
+    // Employer cost
+    const empPension = gross * 0.0976;
+    const empDisability = gross * 0.065;
+    const empAccident = gross * 0.0167;
+    const empFP = gross * 0.0245;
+    const empFGSP = gross * 0.001;
+    const empTotal = gross + empPension + empDisability + empAccident + empFP + empFGSP;
+    el('emp_gross').textContent = fmt(gross);
+    el('emp_pension').textContent = fmt(empPension);
+    el('emp_disability').textContent = fmt(empDisability);
+    el('emp_accident').textContent = fmt(empAccident);
+    el('emp_fp').textContent = fmt(empFP);
+    el('emp_fgsp').textContent = fmt(empFGSP);
+    el('emp_total').textContent = fmt(empTotal) + ' / month';
+  }
+
+  function getZusB2b() {
+    const type = el('zusType').value;
+    if (type === 'preferential') return { zus: 400, health: null, label: '~400 PLN (preferential)' };
+    if (type === 'maly') return { zus: 850, health: null, label: '~850 PLN (Mały ZUS+, estimate)' };
+    return { zus: 1600, health: null, label: '~1 600 PLN (standard)' };
+  }
+
+  function calcB2b() {
+    const revenue = parseFloat(el('b2bRevenue').value) || 0;
+    const costs = parseFloat(el('b2bCosts').value) || 0;
+    const zusInfo = getZusB2b();
+    const zus = zusInfo.zus;
+    const income = revenue - costs;
+
+    let healthContrib, taxBase, tax, net, rows = '';
+
+    if (currentRegime === 'skala') {
+      healthContrib = Math.max(0, income - zus) * 0.09;
+      taxBase = Math.max(0, income - zus);
+      const relief = taxBase > 0 ? 300 : 0;
+      const annualBase = taxBase * 12;
+      if (annualBase <= 120000) { tax = taxBase * 0.12 - relief; }
+      else { tax = (120000/12)*0.12 + (taxBase - 120000/12)*0.32 - relief; }
+      tax = Math.max(0, tax);
+      net = revenue - costs - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue (invoice)</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Business costs</div><div class="brow-rate">tax-deductible expenses</div></div><div class="brow-amount deduction">− ${fmt(costs)}</div></div>
+        <div class="brow subtotal"><div class="brow-left"><div class="brow-name" style="font-weight:700">Income (dochód)</div></div><div class="brow-amount neutral">${fmt(income)}</div></div>
+        <div class="brow group-header"><div class="group-label">🔴 ZUS contributions (you pay all of it)</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label} · pension + disability + sickness + accident</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance (NFZ)</div><div class="brow-rate">9% of income − ZUS · partially deductible on skala</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow group-header"><div class="group-label">🔴 Income tax — Skala (12% / 32%)</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">income − ZUS</div></div><div class="brow-amount neutral">${fmt(taxBase)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax (after free amount relief)</div><div class="brow-rate">12% up to 120 000/yr, 32% above · −300 PLN relief/month</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    } else if (currentRegime === 'liniowy') {
+      taxBase = Math.max(0, income - zus);
+      healthContrib = taxBase * 0.049; // liniowy: 4.9% of income
+      tax = taxBase * 0.19;
+      net = revenue - costs - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Business costs</div></div><div class="brow-amount deduction">− ${fmt(costs)}</div></div>
+        <div class="brow subtotal"><div class="brow-left"><div class="brow-name" style="font-weight:700">Income</div></div><div class="brow-amount neutral">${fmt(income)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label}</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance</div><div class="brow-rate">4.9% of income (liniowy rate, partially deductible)</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax — Liniowy</div><div class="brow-rate">19% flat on (income − ZUS) · no free amount relief</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    } else {
+      const rate = parseFloat(el('ryczaltRate').value);
+      healthContrib = revenue * 0.09; // simplified
+      tax = revenue * rate;
+      zus; // same as selected
+      net = revenue - zus - healthContrib - tax;
+      rows = `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Revenue</div><div class="brow-rate">costs are NOT deductible on ryczałt</div></div><div class="brow-amount neutral">${fmt(revenue)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">ZUS social contributions</div><div class="brow-rate">${zusInfo.label}</div></div><div class="brow-amount deduction">− ${fmt(zus)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Health insurance</div><div class="brow-rate">based on revenue brackets (simplified)</div></div><div class="brow-amount deduction">− ${fmt(healthContrib)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax — Ryczałt</div><div class="brow-rate">${(rate*100).toFixed(1)}% of revenue · no deductions allowed</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    }
+
+    const totalDeductions = (revenue - net);
+    const effRate = revenue > 0 ? totalDeductions / revenue : 0;
+
+    rows += `<div class="brow" style="padding:16px 0 4px;border-bottom:none"><div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net take-home</div></div><div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)">${fmt(net)}</div></div>`;
+    el('b2bBreakdown').innerHTML = rows;
+
+    el('b2bNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('b2bTotalDeductions').textContent = '−' + fmt(totalDeductions);
+    el('b2bEffRate').textContent = fmtPct(effRate);
+    el('b2bAnnualNet').textContent = fmt(net * 12);
+    el('b2bZusMonthly').textContent = fmt(zus);
+  }
+
+  function uopNetFor(gross) {
+    const pension = gross * 0.0976, disability = gross * 0.015, sickness = gross * 0.0245;
+    const zusEmp = pension + disability + sickness;
+    const health = (gross - zusEmp) * 0.09;
+    const taxBase = Math.max(0, gross - zusEmp - 250);
+    let tax;
+    if (taxBase * 12 <= 120000) tax = taxBase * 0.12;
+    else tax = (120000/12)*0.12 + (taxBase - 120000/12)*0.32;
+    tax = Math.max(0, tax - 300);
+    return gross - zusEmp - health - tax;
+  }
+  function b2bNetFor(revenue, costs) {
+    const zus = 1600, income = revenue - costs;
+    const healthContrib = Math.max(0, income - zus) * 0.09;
+    const taxBase = Math.max(0, income - zus);
+    let tax;
+    if (taxBase*12 <= 120000) tax = taxBase*0.12 - 300;
+    else tax = (120000/12)*0.12 + (taxBase-120000/12)*0.32 - 300;
+    tax = Math.max(0, tax);
+    return revenue - costs - zus - healthContrib - tax;
+  }
+  function b2bLiniowy(revenue, costs) {
+    const zus = 1600, income = revenue - costs;
+    const taxBase = Math.max(0, income - zus);
+    const health = taxBase * 0.049;
+    const tax = taxBase * 0.19;
+    return revenue - costs - zus - health - tax;
+  }
+  function b2bRyczalt(revenue, rate) {
+    const zus = 1600, health = revenue * 0.09, tax = revenue * rate;
+    return revenue - zus - health - tax;
+  }
+
+  function calcCompare() {
+    const amount = parseFloat(el('cmpAmount').value) || 0;
+    const costs = parseFloat(el('cmpCosts').value) || 0;
+    const uopN = uopNetFor(amount);
+    const b2bSkala = b2bNetFor(amount, costs);
+    const b2bLin = b2bLiniowy(amount, costs);
+    const b2bRycz = b2bRyczalt(amount, 0.085);
+
+    const results = [
+      { label: 'UoP', sub: 'Skala 12%/32%', net: uopN, color: '#1B2E4B' },
+      { label: 'B2B — Skala', sub: '12%/32% + standard ZUS', net: b2bSkala, color: '#2563eb' },
+      { label: 'B2B — Liniowy', sub: '19% flat + standard ZUS', net: b2bLin, color: '#7c3aed' },
+      { label: 'B2B — Ryczałt', sub: '8.5% (IT/programming)', net: b2bRycz, color: '#d97706' },
+    ].sort((a,b) => b.net - a.net);
+
+    const best = results[0].net;
+    let html = '<div class="net-card" style="margin-bottom:16px"><div class="net-label">Best option for ' + fmt(amount) + ' gross</div>';
+    html += '<div class="net-amount">' + results[0].label + ' <span style="font-size:16px">' + results[0].sub + '</span></div>';
+    html += '<div class="net-sub">Take-home: ' + fmt(results[0].net) + ' vs worst: ' + fmt(results[results.length-1].net) + ' · difference: ' + fmt(best - results[results.length-1].net) + '/month</div></div>';
+
+    html += '<div class="breakdown-card"><div class="breakdown-title">All options compared</div><div class="breakdown-rows">';
+    results.forEach((r, i) => {
+      const diff = r.net - results[results.length-1].net;
+      html += `<div class="brow">
+        <div class="brow-left">
+          <div class="brow-name" style="display:flex;align-items:center;gap:8px">
+            ${i===0?'<span style="background:var(--navy);color:white;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700">BEST</span>':''}
+            ${r.label}
+          </div>
+          <div class="brow-rate">${r.sub}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="brow-amount neutral" style="font-size:16px">${fmt(r.net)}</div>
+          ${i<results.length-1?`<div style="font-size:11px;color:var(--green);font-weight:600">+${fmt(diff)} vs worst</div>`:'<div style="font-size:11px;color:var(--muted)">baseline</div>'}
+        </div>
+      </div>`;
+    });
+    html += '</div></div>';
+
+    html += `<div class="note-box"><strong>Note on B2B rates:</strong> B2B ryczałt 8.5% is for IT/programming services. Your rate may differ. B2B numbers assume standard ZUS (1,600 PLN/month) and ${fmt(costs)} monthly costs. Always verify with an accountant for your specific situation. <a href="#contact" style="color:var(--red);font-weight:600">Get a free tax consultation →</a></div>`;
+
+    el('compareResults').innerHTML = html;
+  }
+
+  // Init
+  calcUop();
+
+
+  function syncZlRange(v) { setSharedAmount(v); calcZlecenie(); }
+
+  function calcZlecenie() {
+    const gross = parseFloat(el('zlGross').value) || 0;
+    const sit = el('zlZusSit').value;
+    const voluntarySick = el('zlSickness').checked;
+    const under26 = el('zlUnder26').checked;
+
+    // ZUS rates (employee side)
+    let pension = 0, disability = 0, sickness = 0, health = 0;
+    let zusNote = '';
+
+    if (sit === 'student') {
+      // No ZUS, no health for students under 26
+      pension = 0; disability = 0; sickness = 0; health = 0;
+      zusNote = 'Student under 26: exempt from ZUS and health contribution';
+    } else if (sit === 'additional') {
+      // Already paying ZUS at main job — only health mandatory
+      pension = 0; disability = 0; sickness = 0;
+      health = gross * 0.09;
+      zusNote = 'Additional contract: only health (9%) applies — ZUS covered by main employer';
+    } else if (sit === 'retired') {
+      // Pensioner: no social ZUS, only health
+      pension = 0; disability = 0; sickness = 0;
+      health = gross * 0.09;
+      zusNote = 'Pensioner: only health insurance applies';
+    } else {
+      // Main job: full ZUS
+      pension = gross * 0.0976;
+      disability = gross * 0.015;
+      sickness = voluntarySick ? gross * 0.0245 : 0;
+      const zusBase = gross - pension - disability - sickness;
+      health = zusBase * 0.09;
+      zusNote = voluntarySick ? 'Full ZUS including voluntary sickness' : 'Full ZUS (sickness insurance not opted in)';
+    }
+
+    const zusTotal = pension + disability + sickness;
+
+    // Tax — Zlecenie uses 20% koszty uzyskania (cost deduction)
+    // Tax base = gross - ZUS employee - 20% koszty
+    const kup = (gross - zusTotal) * 0.20;
+    const taxBase = Math.max(0, gross - zusTotal - kup);
+    let tax = 0;
+
+    if (!under26 && sit !== 'student') {
+      const annualBase = taxBase * 12;
+      if (annualBase <= 120000) {
+        tax = taxBase * 0.12;
+      } else {
+        tax = (120000/12) * 0.12 + (taxBase - 120000/12) * 0.32;
+      }
+      // Free amount relief 300/month
+      tax = Math.max(0, tax - 300);
+    }
+
+    const net = gross - zusTotal - health - tax;
+    const totalDed = gross - net;
+    const effRate = gross > 0 ? totalDed / gross : 0;
+
+    // Update summary
+    el('zlNet').innerHTML = fmtNum(net) + ' <span>PLN</span>';
+    el('zlNetSub').textContent = fmtPct(net/gross) + ' of gross · ' + zusNote;
+    el('zlTotalDed').textContent = '−' + fmt(totalDed);
+    el('zlEffRate').textContent = fmtPct(effRate);
+    el('zlAnnualNet').textContent = fmt(net * 12);
+    el('zlAnnualGross').textContent = fmt(gross * 12);
+
+    // Breakdown rows
+    let rows = `
+      <div class="brow">
+        <div class="brow-left"><div class="brow-name">Gross rate</div><div class="brow-rate">brutto</div></div>
+        <div class="brow-amount neutral">${fmt(gross)}</div>
+      </div>`;
+
+    if (sit === 'student') {
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name" style="color:var(--green)">✓ ZUS exempt (student u26)</div><div class="brow-rate">No pension, disability, sickness, or health contributions</div></div><div class="brow-amount positive">0 PLN</div></div>`;
+    } else {
+      rows += `<div class="brow group-header"><div class="group-label">🔴 Employee ZUS contributions</div></div>`;
+      if (pension > 0) rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Pension (emerytalne)</div><div class="brow-rate">9.76% of gross</div></div><div class="brow-amount deduction">− ${fmt(pension)}</div></div>`;
+      if (disability > 0) rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Disability (rentowe)</div><div class="brow-rate">1.5% of gross</div></div><div class="brow-amount deduction">− ${fmt(disability)}</div></div>`;
+      if (sit === 'main') {
+        if (voluntarySick) {
+          rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Sickness (chorobowe) — voluntary</div><div class="brow-rate">2.45% of gross · opted in</div></div><div class="brow-amount deduction">− ${fmt(sickness)}</div></div>`;
+        } else {
+          rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Sickness insurance</div><div class="brow-rate">Not opted in — no sick pay entitlement</div></div><div class="brow-amount neutral" style="color:var(--muted)">0 PLN</div></div>`;
+        }
+      }
+      rows += `<div class="brow group-header"><div class="group-label">🔴 Health insurance (NFZ)</div></div>`;
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name">Health contribution</div><div class="brow-rate">9% of (gross − ZUS)${sit === 'additional' ? ' · only mandatory contribution' : ''}</div></div><div class="brow-amount deduction">− ${fmt(health)}</div></div>`;
+    }
+
+    rows += `<div class="brow group-header"><div class="group-label">🔴 Income tax (PIT)</div></div>`;
+    if (under26 || sit === 'student') {
+      rows += `<div class="brow"><div class="brow-left"><div class="brow-name" style="color:var(--green)">✓ Tax exempt (ZIT / student)</div><div class="brow-rate">No income tax up to 85,528 PLN/year</div></div><div class="brow-amount positive">0 PLN</div></div>`;
+    } else {
+      rows += `
+        <div class="brow"><div class="brow-left"><div class="brow-name">Cost deduction (koszty uzyskania)</div><div class="brow-rate">20% of (gross − ZUS) — Zlecenie-specific, vs fixed 250 PLN for UoP</div></div><div class="brow-amount positive">− ${fmt(kup)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Tax base</div><div class="brow-rate">gross − ZUS − 20% koszty</div></div><div class="brow-amount neutral">${fmt(taxBase)}</div></div>
+        <div class="brow"><div class="brow-left"><div class="brow-name">Income tax (after 300 PLN/mo relief)</div><div class="brow-rate">12% up to 120k/yr · 32% above</div></div><div class="brow-amount deduction">− ${fmt(tax)}</div></div>`;
+    }
+
+    rows += `<div class="brow" style="padding:16px 0 4px;border-bottom:none">
+      <div class="brow-left"><div class="brow-name" style="font-size:16px;font-weight:700;color:var(--navy)">Net take-home</div></div>
+      <div class="brow-amount neutral" style="font-size:18px;font-weight:800;color:var(--navy)">${fmt(net)}</div>
+    </div>`;
+    el('zlBreakdown').innerHTML = rows;
+
+    // Employer cost breakdown
+    let empRows = '';
+    let empPension = 0, empDisability = 0, empAccident = 0, empFP = 0, empTotal = gross;
+
+    if (sit === 'main' || sit === 'retired') {
+      empPension = gross * 0.0976;
+      empDisability = gross * 0.065;
+      empAccident = gross * 0.0167;
+      // FP only if remuneration >= minimum wage (simplified: always for main)
+      empFP = gross * 0.0245;
+      empTotal = gross + empPension + empDisability + empAccident + empFP;
+    } else if (sit === 'student' || sit === 'additional') {
+      // No employer ZUS contributions for students u26 or additional
+      empTotal = gross;
+    }
+
+    empRows += `<div style="font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:#92400e;margin-bottom:16px">${fmt(empTotal)} / month</div>`;
+    empRows += `<div class="er"><span class="er-name">Your gross rate</span><span class="er-amount">${fmt(gross)}</span></div>`;
+    if (sit === 'main') {
+      empRows += `
+        <div class="er"><span class="er-name">Pension — 9.76%</span><span class="er-amount">${fmt(empPension)}</span></div>
+        <div class="er"><span class="er-name">Disability — 6.5%</span><span class="er-amount">${fmt(empDisability)}</span></div>
+        <div class="er"><span class="er-name">Accident — 1.67%</span><span class="er-amount">${fmt(empAccident)}</span></div>
+        <div class="er"><span class="er-name">Labour Fund (FP) — 2.45%</span><span class="er-amount">${fmt(empFP)}</span></div>`;
+    } else {
+      empRows += `<div class="er"><span class="er-name" style="color:var(--green)">✓ No employer ZUS contributions</span><span class="er-amount" style="color:var(--green)">0 PLN</span></div>`;
+    }
+    empRows += `<div class="er" style="padding-top:10px;border-top:1px solid #fed7aa;margin-top:8px"><span class="er-name" style="font-weight:700">Total employer cost</span><span class="er-amount" style="font-weight:700;color:#92400e">${fmt(empTotal)}</span></div>`;
+    el('zlEmployerBreakdown').innerHTML = empRows;
+  }
+
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showTab(name, el) {
+  document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+}
+
+function calculate() {
+  const gross = parseFloat(document.getElementById('grossInput').value) || 15000;
+  const type = document.getElementById('empType').value;
+  const regime = document.getElementById('taxRegime').value;
+  let net;
+  if (type === 'uop') {
+    const zusEmp = gross * 0.1371;
+    const taxBase = Math.max(gross - zusEmp - 300, 0);
+    const monthlyThreshold = 10000;
+    const pit = taxBase <= monthlyThreshold ? taxBase * 0.12 : monthlyThreshold * 0.12 + (taxBase - monthlyThreshold) * 0.32;
+    const health = gross * 0.09;
+    net = gross - zusEmp - pit - health;
+  } else {
+    const zusFlat = 500;
+    const taxBase = Math.max(gross - zusFlat, 0);
+    let pit;
+    if (regime === 'skala') { pit = taxBase <= 10000 ? taxBase * 0.12 : 1200 
+
+</script>
+</section>
+
+<!-- KNOWLEDGE HUB -->
+<section class="uc-section knowledge" id="knowledge">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">📚</div>
+      <h4>Knowledge Hub — coming soon</h4>
+      <p>Articles and guides are being written. First batch drops soon.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Knowledge Hub</div>
+  <h2 class="section-title">Everything you need to know,<br><em>in plain English.</em></h2>
+  <div class="knowledge-grid">
+    <div class="kn-card">
+      <div class="kn-tier">Free for Everyone</div>
+      <h3>Essential Expat Guides</h3>
+      <ul class="kn-list">
+        <li>What is Karta Pobytu and who needs it?</li>
+        <li>How to register a JDG in Poland</li>
+        <li>Understanding ZUS contributions</li>
+        <li>Opening a bank account as a foreigner</li>
+        <li>Getting your PESEL number</li>
+        <li>Tax year calendar & key deadlines</li>
+        <li>Glossary of Polish bureaucratic terms</li>
+      </ul>
+    </div>
+    <div class="kn-card premium">
+      <div class="kn-tier">Coming Soon</div>
+      <h3>In-Depth Subscriber Library</h3>
+      <ul class="kn-list">
+        <li>Step-by-step guides with real screenshots</li>
+        <li>Document templates — fill in your details</li>
+        <li>Letter templates in Polish for Urząd</li>
+        <li>Law update alerts when things change</li>
+        <li>Priority email support from our team</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="uc-section blog" id="blog">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">✍️</div>
+      <h4>Blog — coming soon</h4>
+      <p>First articles are being written. Subscribe on Telegram to get notified.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Latest Articles</div>
+  <h2 class="section-title">Guides & <em>resources.</em></h2>
+  <div class="blog-grid">
+    <a href="#" class="blog-card"><div class="blog-img" style="background:#FFF3F3">🏠</div><div class="blog-body"><div class="blog-tag">Residency</div><h3>Karta Pobytu in Poland: Complete Guide for Non-EU Citizens (2024)</h3><p>Everything you need about temporary residence permits — from eligibility to the Urząd appointment queue in Warsaw.</p><div class="blog-meta"><span>⏱ 8 min</span><span>📅 Jan 2024</span></div></div></a>
+    <a href="#" class="blog-card"><div class="blog-img" style="background:#F0FDF4">💼</div><div class="blog-body"><div class="blog-tag">Business</div><h3>How to Register a JDG in Poland as a Foreigner (Step by Step)</h3><p>A practical walkthrough of JDG registration on biznes.gov.pl, with PKD code selection and ZUS options explained.</p><div class="blog-meta"><span>⏱ 12 min</span><span>📅 Feb 2024</span></div></div></a>
+    <a href="#" class="blog-card"><div class="blog-img" style="background:#EFF6FF">💰</div><div class="blog-body"><div class="blog-tag">Taxes</div><h3>UoP vs B2B in Poland: Real Numbers Compared (2024)</h3><p>Side-by-side comparison of employment vs freelance contracts with actual take-home calculations for different income levels.</p><div class="blog-meta"><span>⏱ 10 min</span><span>📅 Jan 2024</span></div></div></a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="uc-section testimonials">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">⭐</div>
+      <h4>Testimonials — coming soon</h4>
+      <p>Collecting reviews from first clients.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Client Stories</div>
+  <h2 class="section-title">Real results for <em>real people.</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>"I was completely lost with the karta pobytu process. Warsaw Expat Hub walked me through every step — approved in 6 weeks. Couldn't have done it without them."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">J</div><div><div class="t-name">James R.</div><div class="t-meta">Software Engineer · UK</div></div></div></div>
+    <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>"Setting up my freelance business seemed so complicated. They registered my JDG, helped with the bank account, and connected me with an accountant — all in one week."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">P</div><div><div class="t-name">Priya K.</div><div class="t-meta">Consultant · India</div></div></div></div>
+    <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>"The tax calculator saved me hours of confusion. The accountant session explained everything in plain English. 100% worth every złoty."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">M</div><div><div class="t-name">Marcus T.</div><div class="t-meta">Product Manager · USA</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" id="contact">
+  <h2>Ready to sort your life<br>in <em>Warsaw?</em></h2>
+  <p>Book a free 15-minute call. No commitment, no jargon — just honest advice.</p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/48000000000" class="btn-outline" style="padding:16px 32px;font-size:16px;display:inline-flex;align-items:center;gap:10px">
+      <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="https://t.me/warsawexpathub" class="btn-outline" style="padding:16px 32px;font-size:16px;display:inline-flex;align-items:center;gap:10px">
+      <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Telegram
+    </a>
+    <a href="mailto:contact@expathub.pl" class="btn-primary" style="padding:16px 32px;font-size:16px">
+      📧 contact@expathub.pl <span class="cs-tag" style="background:rgba(255,255,255,0.2);color:white">Book via email</span>
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS MODALS -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOut(event)">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<!-- ABOUT ME -->
+<section class="uc-section about" id="about">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">👤</div>
+      <h4>About — coming soon</h4>
+      <p>Full bio and background being written.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">About me</div>
+  <div class="about-grid">
+    <div class="about-photo">
+      <div class="about-photo-placeholder">
+        <span class="about-initials">[Photo]</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="about-badge">✈️ Expat since 2019 · Warsaw</div>
+      <h2>I moved to Warsaw.<br>Then I helped friends.<br><em>Then it became a business.</em></h2>
+      <p>I'm <strong>[Your Name]</strong> — a lawyer by training, an expat by choice. When I first arrived in Poland, I went through everything you're probably facing right now: karta pobytu queues, confusing ZUS forms, banks that didn't want to talk to foreigners, and zero information in English that was actually accurate.</p>
+      <p>I started helping friends navigate this. Then friends of friends. Then strangers who found me on expat Facebook groups. After a few years of doing this on the side, I realised there was a real gap — people needed <strong>a trusted person, not another agency</strong>. Someone who'd actually been through it, who speaks their language (literally and figuratively), and who would tell them the truth.</p>
+      <p>My legal background means I understand what matters and what doesn't in documents. But I also know when a case genuinely needs a specialist — and I'll tell you that upfront, before you spend any money.</p>
+      <div class="about-values">
+        <div class="about-value">
+          <span class="av-icon">⚖️</span>
+          <div><div class="av-title">Legal background</div><div class="av-text">Law degree + years of practical immigration and business law experience. I know how the system works — and how to work with it.</div></div>
+        </div>
+        <div class="about-value">
+          <span class="av-icon">🗺️</span>
+          <div><div class="av-title">Warsaw insider</div><div class="av-text">I know which Urzędy have shorter queues, which banks are expat-friendly, which neighbourhoods suit different lifestyles. Real local knowledge.</div></div>
+        </div>
+        <div class="about-value">
+          <span class="av-icon">🤝</span>
+          <div><div class="av-title">One person, fully accountable</div><div class="av-text">You're not a ticket in a queue. If something goes wrong or you have a question at 9pm, you message me directly. That's the deal.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE GUIDES -->
+<section class="uc-section guides" id="guides">
+  <div class="uc-section-overlay">
+    <div class="uc-section-msg">
+      <div class="uc-icon">📋</div>
+      <h4>Free Guides — coming soon</h4>
+      <p>First guides dropping soon. Follow on Telegram to get them first.</p>
+      <a href="https://t.me/warsawexpathub">Get notified on Telegram →</a>
+    </div>
+  </div>
+
+  <div class="section-label">Free Guides · No signup required</div>
+  <h2 class="section-title">Just useful stuff,<br><em>for free.</em></h2>
+  <p class="guides-intro">I publish honest, practical guides based on real questions from real expats. No fluff, no upselling. If you can figure it out yourself from reading this — great. If you want help — I'm here.</p>
+  <div class="guides-grid">
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">📋</span>
+      <div class="guide-tag">Residency</div>
+      <h3>Karta Pobytu: what you actually need (and what you don't)</h3>
+      <p>The complete document checklist, common rejection reasons, and how to avoid them. Based on 20+ applications.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">💼</span>
+      <div class="guide-tag">Business</div>
+      <h3>JDG in Poland: step-by-step for foreigners (2024)</h3>
+      <p>How to register your sole proprietorship on biznes.gov.pl without speaking Polish. Which PKD codes to pick. What ZUS options you have.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">🏦</span>
+      <div class="guide-tag">Banking</div>
+      <h3>Which Polish bank will actually open an account for you</h3>
+      <p>mBank, Santander, PKO — which ones accept foreigners, what documents they require, and insider tips to avoid rejections.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">💰</span>
+      <div class="guide-tag">Taxes</div>
+      <h3>UoP vs B2B: real numbers for a 15,000 zł salary</h3>
+      <p>Stop guessing. Here's the actual math on take-home pay, ZUS options, and which regime makes sense for your situation.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">🏠</span>
+      <div class="guide-tag">Housing</div>
+      <h3>Renting a flat in Warsaw as a foreigner: what to watch out for</h3>
+      <p>Red flags in rental contracts, how to negotiate, neighbourhoods explained, and why meldunek matters more than you think.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+    <a href="#" class="guide-card">
+      <span class="guide-emoji">🪪</span>
+      <div class="guide-tag">Admin</div>
+      <h3>PESEL + Profil Zaufany: your gateway to Polish bureaucracy</h3>
+      <p>Why you need these, how to get them, and how they unlock everything else — banking, ZUS, government portals.</p>
+      <span class="guide-read">Read free guide →</span>
+    </a>
+  </div>
+  <div class="guides-note">
+    <span class="guides-note-icon">📬</span>
+    <div>
+      <h4>New guide every 2 weeks</h4>
+      <p>I write about real situations I see with clients. <a href="https://t.me/warsawexpathub">Join the Telegram channel</a> to get new guides as I publish them — no spam, no newsletter, just useful updates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap"><span class="fl-warsaw">Warsaw</span><span class="fl-expat">Expat</span><span class="fl-hub">Hub</span></div>
+      <p>Helping English-speaking expats navigate life in Warsaw — from residency to running a business. All in plain English.</p>
+      <div class="footer-socials">
+        <a href="#" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="#" title="Telegram"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="#" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Karta Pobytu</a></li><li><a href="#">JDG Registration</a></li><li><a href="#">Bank Account</a></li><li><a href="#">Tax Consultation</a></li><li><a href="#">Ongoing Accounting</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="#">Knowledge Hub</a></li><li><a href="#">Tax Calculator</a></li><li><a href="#">Blog</a></li><li><a href="#">Expat Glossary</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Telegram</a></li><li><a href="#"><span class="__cf_email__" data-cfemail="bed6dbd2d2d1fec9dfcccddfc9dbc6cedfcad6cbdc90ddd1d3">[email&#160;protected]</span></a></li><li><a href="#">Book Free Call</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 WarsawExpatHub · All rights reserved</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+  // ── PROCESS MODALS ──────────────────────────────────────────────────────
+  const modals = {
+    karta: {
+      tag: 'Residency', title: 'Karta Pobytu (Temporary Residence)',
+      desc: "Getting your karta pobytu is the most important step for living in Poland long-term. Here's exactly what the process looks like when we work together.",
+      meta: [{label:'Typical timeline',value:'3–6 months'},{label:'My fee',value:'zł749'},{label:'Gov. stamp duty',value:'zł340 (paid separately)'},{label:'In-person required',value:'Yes, once'}],
+      steps: [
+        {who:'me',title:'Free 15-min call',text:"We talk through your situation — visa status, employer, duration of stay. I tell you which type of karta you qualify for and what to expect."},
+        {who:'me',title:'Personalised document checklist sent to you',text:"You get your actual list based on your case — not a generic template."},
+        {who:'you',title:'You gather documents',text:"Passport, photos, employment contract, proof of address, insurance. I'm on WhatsApp the whole time to answer questions."},
+        {who:'me',title:'I prepare and review the application',text:"I fill in all Polish forms, translate what needs translating, check everything twice. You sign where needed."},
+        {who:'both',title:'Urząd appointment together',text:"We go together to submit. I translate, handle officer questions, make sure nothing gets rejected on the spot."},
+        {who:'me',title:'Waiting period & follow-up',text:"I track the status and alert you to any requests for additional docs. You don't need to do anything unless I ask."},
+        {who:'you',title:'Collect your card',text:"When approved, you go pick it up (15 min). Legal for the next 1–3 years."}
+      ],
+      checklist:["Valid passport (+ copies of all pages)","Passport-format photos (2x)","Proof of address (rental contract)","Employment contract or business documents","Health insurance confirmation","Proof of sufficient income / bank statement","Application fee zł340 (cash at Urząd)"]
+    },
+    pesel: {
+      tag: 'Admin', title: 'PESEL & Meldunek',
+      desc: "Your PESEL is your Polish identity number — you need it for banking, healthcare, taxes, Profil Zaufany. Getting it is simpler than you think.",
+      meta: [{label:'Timeline',value:'1–5 days'},{label:'My fee',value:'zł199'},{label:'Gov. cost',value:'Free'},{label:'In-person required',value:'Yes, once'}],
+      steps: [
+        {who:'me',title:'Quick call to confirm your situation',text:"EU citizen or non-EU? Registered address? This affects which path we take."},
+        {who:'me',title:'Prepare your documents',text:"I tell you exactly what to bring to the Urząd."},
+        {who:'both',title:'Visit the Urząd Dzielnicy together',text:"I come with you, handle the Polish, fill in any forms, make sure the clerk processes everything correctly."},
+        {who:'you',title:'Receive PESEL',text:"Usually on the spot or within 3 working days."},
+        {who:'me',title:'Set up Profil Zaufany (optional)',text:"Once you have PESEL, I can help you set up your digital government ID — needed for ZUS, tax portal, and more."}
+      ],
+      checklist:["Passport (original)","Copy of rental contract / lease","Completed meldunek form (I prepare this)","Landlord signature on meldunek (I help get this)"]
+    },
+    bank: {
+      tag: 'Banking', title: 'Bank Account Opening',
+      desc: "Polish banks can be frustrating for foreigners. Some reject non-EU residents outright. I know which banks work and what to say.",
+      meta: [{label:'Timeline',value:'1–3 days'},{label:'My fee',value:'zł199'},{label:'Best without PESEL',value:'mBank or Santander'},{label:'In-person required',value:'Yes (1 visit)'}],
+      steps: [
+        {who:'me',title:'Assess your situation',text:"PESEL? Work permit? This changes which banks will take you. I pick the best option."},
+        {who:'me',title:'Prepare your documents + coaching',text:"Passport, visa/residence card, proof of address. I also coach you on what to say."},
+        {who:'both',title:'Visit the branch together',text:"I come with you, translate, handle any issues. If the clerk says no, I know how to escalate."},
+        {who:'you',title:'Account open',text:"You leave with a working Polish bank account, online banking set up, card ordered."}
+      ],
+      checklist:["Passport (original)","Residence permit or visa","Proof of address (rental contract)","Polish phone number (for SMS)","PESEL if you have it (not always required)"]
+    },
+    tax: {
+      tag: 'Tax & Accounting', title: 'Tax Consultation',
+      desc: "Polish tax law is complex — especially on B2B, with foreign income, or if you just moved mid-year. I connect you with a certified English-speaking accountant.",
+      meta: [{label:'Consultation',value:'60 min — zł299'},{label:'Ongoing accounting',value:'from zł399/month'},{label:'Language',value:'English'},{label:'Accountant',value:'Certified (Doradca Podatkowy)'}],
+      steps: [
+        {who:'me',title:'Initial intake',text:"I gather the basics — income type, residency status, foreign income. Makes the accountant session much more efficient."},
+        {who:'both',title:'Meeting with accountant',text:"I join the first call to make sure nothing gets lost in translation. Options explained in plain English."},
+        {who:'me',title:'Written summary sent to you',text:"Your tax obligations, recommended regime, next steps. In English."},
+        {who:'you',title:'Decide how to proceed',text:"One-off consultation or ongoing monthly bookkeeping. No pressure."}
+      ],
+      checklist:["Employment contract or JDG registration","Proof of Polish tax residency (or not)","Foreign income details — amounts and countries","Previous year's PIT if applicable","ZUS registration status"]
+    },
+    jdg: {
+      tag: 'Business', title: 'JDG Registration (Sole Proprietorship)',
+      desc: "Registering a JDG in Poland is straightforward if you know what you're doing. I've done this dozens of times and can have yours live in 2–5 days.",
+      meta: [{label:'Timeline',value:'2–5 days'},{label:'My fee',value:'zł499'},{label:'Gov. cost',value:'Free'},{label:'Can be remote',value:'Yes, with Profil Zaufany'}],
+      steps: [
+        {who:'me',title:'Consultation call',text:"Business type, PKD codes, ryczałt vs skala, VAT — we go through everything before touching any form."},
+        {who:'me',title:'Prepare the CEIDG application',text:"I fill it in, pick PKD codes, select your tax regime. You review and confirm."},
+        {who:'both',title:'Submit registration',text:"Via biznes.gov.pl (using your Profil Zaufany) or in person. Takes 15 minutes."},
+        {who:'me',title:'ZUS registration',text:"After CEIDG is approved, I register you with ZUS and explain contribution options — standard vs. preferencyjny for first 2 years."},
+        {who:'me',title:'Bank account advice',text:"I recommend which account suits you and help you open it."},
+        {who:'you',title:"You're in business",text:"NIP, REGON, ZUS — all done. Start invoicing within days."}
+      ],
+      checklist:["Passport or Polish ID","PESEL number","Profil Zaufany (or I help set it up)","Polish business address","Services/products list (for PKD selection)","Tax regime decision (we discuss this)"]
+    }
+  };
+
+  function openModal(type) {
+    const m = modals[type]; if (!m) return;
+    const box = document.getElementById('modalBox');
+    const stepsHtml = m.steps.map((s,i) => `<div class="modal-step"><div class="step-num">${i+1}</div><div class="step-content"><div class="step-who ${s.who}">${s.who==='me'?'👤 I handle this':s.who==='you'?'🙋 You do this':'🤝 Together'}</div><div class="step-title">${s.title}</div><p>${s.text}</p></div></div>`).join('');
+    const metaHtml = m.meta.map(x=>`<div class="meta-item"><div class="meta-label">${x.label}</div><div class="meta-value">${x.value}</div></div>`).join('');
+    const checkHtml = m.checklist.map(x=>`<li>${x}</li>`).join('');
+    box.innerHTML = `<div class="modal-header"><div><div class="modal-tag">${m.tag}</div><h3>${m.title}</h3></div><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-body"><p class="modal-desc">${m.desc}</p><div class="modal-meta">${metaHtml}</div><h4 style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Step by step</h4><div class="modal-steps">${stepsHtml}</div><div class="modal-checklist"><h4>Document checklist</h4><ul class="checklist-items">${checkHtml}</ul></div><a href="https://wa.me/48000000000" class="modal-cta">💬 Message me about this service</a></div>`;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+  function closeModalOut(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
++
